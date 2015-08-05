@@ -1,5 +1,6 @@
 package com.mjavka.fresupp.dao;
 
+import com.mjavka.fresupp.model.Manager;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -8,14 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.mjavka.fresupp.model.Login;
-import java.util.Calendar;
 
 @Repository
-public class LoginDAOImpl implements LoginDAO
+public class ManagerDAOImpl implements ManagerDAO
 {
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginDAOImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ManagerDAOImpl.class);
 
     private SessionFactory sessionFactory;
 
@@ -25,25 +24,24 @@ public class LoginDAOImpl implements LoginDAO
     }
 
     @Override
-    public void addLogin(Login p)
+    public void addManager(Manager p)
     {
         Session session = this.sessionFactory.getCurrentSession();
-        p.setRegDate(Calendar.getInstance().getTime());
         session.persist(p);
-        logger.info("Person saved successfully, Person Details=" + p);
+        logger.info("Person saved successfully, Manager Details=" + p);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Login> listLogin()
+    public List<Manager> listManager()
     {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Login> LoginsList = session.createQuery("from Login").list();
-        for (Login p : LoginsList)
+        List<Manager> managerList = session.createQuery("from Manager").list();
+        for (Manager p : managerList)
         {
-            logger.info("Login List::" + p);
+            logger.info("Manager List::" + p);
         }
-        return LoginsList;
+        return managerList;
     }
 
 }
