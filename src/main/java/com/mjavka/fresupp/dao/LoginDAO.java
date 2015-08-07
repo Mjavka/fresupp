@@ -8,4 +8,6 @@ public interface LoginDAO {
  
     public void addLogin(Login p);
     public List<Login> listLogin();
+    
+    Login getLogin(String username);
 }

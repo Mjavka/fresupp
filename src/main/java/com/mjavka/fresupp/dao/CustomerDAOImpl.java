@@ -2,6 +2,7 @@ package com.mjavka.fresupp.dao;
 
 import com.mjavka.fresupp.model.Customer;
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,21 +23,46 @@ public class CustomerDAOImpl implements CustomerDAO
     {
         this.sessionFactory = sf;
     }
+    
+    public Session getCurrentSession()
+    {
+        return this.sessionFactory.getCurrentSession();
+    }
 
     @Override
     public void addCustomer(Customer p)
     {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.persist(p);
-        logger.info("Person saved successfully, Customer Details=" + p);
+        getCurrentSession().save(p);
+        logger.info("Customer saved successfully, Customer Details=" + p);
+    }
+    
+    @Override
+    public void updateCustomer(Customer p)
+    {
+        getCurrentSession().update(p);
+        logger.info("Customer updated successfully, Customer Details=" + p);
+    }
+    
+    @Override
+    public void deleteCustomer(Customer p)
+    {
+        getCurrentSession().delete(p);
+    }
+    
+    @Override 
+    public Customer getCustomerByUuid(UUID uuid)
+    {
+        List list = getCurrentSession().createQuery("from Customer where object_uuid=?").setParameter(0, uuid).list();
+        
+        return (Customer)list.get(0);
+        
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public List<Customer> listCustomer()
     {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<Customer> customerList = session.createQuery("from Customer").list();
+        List<Customer> customerList = getCurrentSession().createQuery("from Customer").list();
         for (Customer p : customerList)
         {
             logger.info("Customer List::" + p);

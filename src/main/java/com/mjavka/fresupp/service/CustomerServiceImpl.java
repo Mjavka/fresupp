@@ -10,10 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mjavka.fresupp.model.Customer;
+import java.util.UUID;
 
 @Service
 @ManagedBean(name="customerService")
-@SessionScoped
+@Transactional(readOnly = true)
 public class CustomerServiceImpl implements CustomerService {
 
 	private CustomerDAO customerDAO;
@@ -23,13 +24,32 @@ public class CustomerServiceImpl implements CustomerService {
     }
  
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     public void addCustomer(Customer p) {
         this.customerDAO.addCustomer(p);
     }
- 
+
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
+    public void updateCustomer(Customer p)
+    {
+        this.customerDAO.updateCustomer(p);
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public void deleteCustomer(Customer p)
+    {
+        this.customerDAO.deleteCustomer(p);
+    }
+
+    @Override
+    public Customer getCustomerByUuid(UUID uuid)
+    {
+        return this.customerDAO.getCustomerByUuid(uuid);
+    }
+    
+    @Override
     public List<Customer> listCustomer() {
         return this.customerDAO.listCustomer();
     }

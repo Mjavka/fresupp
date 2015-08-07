@@ -1,14 +1,69 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<faces-config version="2.2"
-              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
-              http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
-
+<?xml version="1.0" encoding="utf-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+        http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">   
+         
+    <!-- Enable Spring -->
     <application>
-        <el-resolver>
-            org.springframework.web.jsf.el.SpringBeanFacesELResolver
-        </el-resolver>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
     </application>
-    
+  
+    <!-- navigation-rule for login.xhtml -->
+    <navigation-rule>
+        <from-view-id>/pages/unsecure/login.xhtml</from-view-id>
+        <!-- navigation-case for method login() -->
+        <navigation-case>
+            <from-action>#{loginAction.login}</from-action>
+            <from-outcome>correct</from-outcome>
+            <to-view-id>/pages/secure/list.xhtml</to-view-id>
+        </navigation-case>
+        <!-- navigation-case for method login() -->
+        <navigation-case>
+            <from-action>#{loginAction.login}</from-action>
+            <from-outcome>incorrect</from-outcome>
+            <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+  
+    <!-- navigation-rule for list.xhtml -->
+    <navigation-rule>
+        <from-view-id>/pages/secure/list.xhtml</from-view-id>
+        <!-- navigation case for method addCustomer() -->
+        <navigation-case>
+               <from-action>#{customerAction.addCustomer}</from-action>
+               <from-outcome>success</from-outcome>
+               <to-view-id>/pages/secure/list.xhtml</to-view-id>
+        </navigation-case>
+        <!-- navigation cases for method updateCustomer(customer) -->
+        <navigation-case>
+               <from-action>#{customerAction.updateCustomer(customer)}</from-action>
+               <from-outcome>success</from-outcome>
+               <to-view-id>/pages/secure/list.xhtml</to-view-id>
+         </navigation-case>
+         <navigation-case>
+              <from-action>#{customerAction.updateCustomer(customer)}</from-action>
+               <from-outcome>error</from-outcome>
+               <to-view-id>/pages/unsecure/error.xhtml</to-view-id>
+         </navigation-case>
+         <!-- navigation-cases for method deleteCustomer(customer) -->    
+         <navigation-case>
+               <from-action>#{customerAction.deleteCustomer(customer)}</from-action>
+               <from-outcome>success</from-outcome>
+               <to-view-id>/pages/secure/list.xhtml</to-view-id>
+         </navigation-case>
+         <navigation-case>
+              <from-action>#{customerAction.deleteCustomer(customer)}</from-action>
+               <from-outcome>error</from-outcome>
+               <to-view-id>/pages/unsecure/error.xhtml</to-view-id>
+         </navigation-case>
+         <!-- navigation case for method logout() -->
+         <navigation-case>
+              <from-action>#{loginAction.logout}</from-action>
+              <from-outcome>loggedout</from-outcome>
+              <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
+              <redirect></redirect>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

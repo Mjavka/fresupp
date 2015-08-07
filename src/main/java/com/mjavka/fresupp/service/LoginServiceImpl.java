@@ -14,6 +14,7 @@ import com.mjavka.fresupp.model.Login;
 @Service
 @ManagedBean(name="loginService")
 @SessionScoped
+@Transactional(readOnly = true)
 public class LoginServiceImpl implements LoginService {
 
 	private LoginDAO loginDAO;
@@ -23,15 +24,14 @@ public class LoginServiceImpl implements LoginService {
     }
  
     @Override
-    @Transactional
-    public void addLogin(Login p) {
-        this.loginDAO.addLogin(p);
-    }
- 
-    @Override
-    @Transactional
     public List<Login> listLogin() {
         return this.loginDAO.listLogin();
     }
- 
+
+    @Override
+    public Login getLogin(String username)
+    {
+        return this.loginDAO.getLogin(username);
+    }
+    
 }

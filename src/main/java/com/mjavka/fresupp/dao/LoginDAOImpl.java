@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.mjavka.fresupp.model.Login;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 @Repository
@@ -38,12 +39,41 @@ public class LoginDAOImpl implements LoginDAO
     public List<Login> listLogin()
     {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Login> LoginsList = session.createQuery("from Login").list();
-        for (Login p : LoginsList)
+        List<Login> loginsList = session.createQuery("from Login").list();
+        for (Login p : loginsList)
         {
             logger.info("Login List::" + p);
         }
-        return LoginsList;
+        return loginsList;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Login getLogin(String username)
+    {
+
+        List<Login> logins = new ArrayList<Login>();
+
+        logins = sessionFactory.getCurrentSession()
+                .createQuery("from Login where username=?")
+                .setParameter(0, username)
+                .list();
+
+        if (logins.size() > 0)
+        {
+            return logins.get(0);
+        } else if (logins.size() > 1)
+        {
+            logger.error("found " + logins.size() + " users with username = "
+                    + username);
+            
+            return null;
+        } else
+
+        {
+            return null;
+        }
+
     }
 
 }
