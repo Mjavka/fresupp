@@ -3,55 +3,60 @@ package com.mjavka.fresupp.service;
 import com.mjavka.fresupp.dao.CustomerDAO;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mjavka.fresupp.model.Customer;
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Service;
 
-@Service
-@ManagedBean(name="customerService")
+@Service("customerService")
 @Transactional(readOnly = true)
 public class CustomerServiceImpl implements CustomerService {
 
-	private CustomerDAO customerDAO;
-	 
-    public void setCustomerDAO(CustomerDAO customerDAO) {
-        this.customerDAO = customerDAO;
-    }
+    @Autowired
+    private CustomerDAO customerDAO;
  
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional(readOnly = false)
     public void addCustomer(Customer p) {
-        this.customerDAO.addCustomer(p);
+        getCustomerDAO().addCustomer(p);
     }
 
     @Override
     @Transactional(readOnly = false)
     public void updateCustomer(Customer p)
     {
-        this.customerDAO.updateCustomer(p);
+        getCustomerDAO().updateCustomer(p);
     }
 
     @Override
     @Transactional(readOnly = false)
     public void deleteCustomer(Customer p)
     {
-        this.customerDAO.deleteCustomer(p);
+        getCustomerDAO().deleteCustomer(p);
     }
 
     @Override
     public Customer getCustomerByUuid(UUID uuid)
     {
-        return this.customerDAO.getCustomerByUuid(uuid);
+        return getCustomerDAO().getCustomerByUuid(uuid);
     }
     
     @Override
     public List<Customer> listCustomer() {
-        return this.customerDAO.listCustomer();
+        return getCustomerDAO().listCustomer();
+    }
+    
+    public CustomerDAO getCustomerDAO() {
+        return customerDAO;
+    }
+    	 
+    public void setCustomerDAO(CustomerDAO customerDAO) {
+        this.customerDAO = customerDAO;
     }
  
 }

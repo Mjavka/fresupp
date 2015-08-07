@@ -40,6 +40,7 @@
             <beans:list>
                 <beans:value>com.mjavka.fresupp.model</beans:value>
                 <beans:value>com.mjavka.fresupp.service</beans:value>
+                <beans:value>com.mjavka.fresupp.dao</beans:value>
             </beans:list>
         </beans:property>
         

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.mjavka.fresupp.model.Login;
 import java.util.ArrayList;
 import java.util.Calendar;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Repository
 public class LoginDAOImpl implements LoginDAO
@@ -18,6 +19,7 @@ public class LoginDAOImpl implements LoginDAO
 
     private static final Logger logger = LoggerFactory.getLogger(LoginDAOImpl.class);
 
+    @Autowired
     private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sf)
@@ -55,7 +57,7 @@ public class LoginDAOImpl implements LoginDAO
         List<Login> logins = new ArrayList<Login>();
 
         logins = sessionFactory.getCurrentSession()
-                .createQuery("from Login where username=?")
+                .createQuery("FROM Login WHERE username=?")
                 .setParameter(0, username)
                 .list();
 

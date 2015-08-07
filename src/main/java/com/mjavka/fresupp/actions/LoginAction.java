@@ -2,7 +2,7 @@ package com.mjavka.fresupp.actions;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,7 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * @author mjavka
  */
 @ManagedBean(name="loginAction")
-@RequestScoped
+@ViewScoped
 public class LoginAction
 {
     private String userName = null; 

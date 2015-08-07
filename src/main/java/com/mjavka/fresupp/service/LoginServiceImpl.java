@@ -2,29 +2,30 @@ package com.mjavka.fresupp.service;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mjavka.fresupp.dao.LoginDAO;
 import com.mjavka.fresupp.model.Login;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Service
-@ManagedBean(name="loginService")
-@SessionScoped
+@Service("loginService")
 @Transactional(readOnly = true)
-public class LoginServiceImpl implements LoginService {
+public class LoginServiceImpl implements LoginService
+{
 
-	private LoginDAO loginDAO;
-	 
-    public void setLoginDAO(LoginDAO loginDAO) {
+    @Autowired
+    private LoginDAO loginDAO;
+
+    public void setLoginDAO(LoginDAO loginDAO)
+    {
         this.loginDAO = loginDAO;
     }
- 
+
     @Override
-    public List<Login> listLogin() {
+    public List<Login> listLogin()
+    {
         return this.loginDAO.listLogin();
     }
 
@@ -33,5 +34,5 @@ public class LoginServiceImpl implements LoginService {
     {
         return this.loginDAO.getLogin(username);
     }
-    
+
 }

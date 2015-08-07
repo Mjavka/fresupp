@@ -25,7 +25,7 @@ public class CustomerAction implements Serializable
     private static final String SUCCESS = "success";
     private static final String ERROR   = "error";
 
-    @ManagedProperty(value="#{CustomerService}")
+    @ManagedProperty(value="#{customerService}")
     CustomerService customerService;
 
     List<Customer> customerList;
