@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+    </h:head>
+
+    <h:body>
+        <div align="right" style="">
+            <h:form  id="regFreelancerFormmId" prependId="false">
+                <div id="regFreelancerFieldsPnlId">
+                    <div id="regFreelancerContId">
+
+                        <h:outputText id="outTxtUserNameId" 
+                                      value="Username: " >
+                        </h:outputText>
+
+                        <h:inputText id="userName" 
+                                     required="true" 
+                                     parent=""
+                                     value="#{freelancerRegistrationAction.userName}" 
+                                     requiredMessage="Please enter username">
+                        </h:inputText>
+
+                        <h:outputLabel id="outLblUserEmailId" 
+                                       for="email" >
+                        </h:outputLabel>
+
+                        <h:outputText id="outTxtUserEmailId" 
+                                      value="email: " >
+                        </h:outputText>
+
+                        <p:inputText id="email" required="true" label="email" size="40"
+                                     requiredMessage="Please enter your email address."
+                                     validatorMessage="Invalid email format"
+                                     value="#{freelancerRegistrationAction.email}">
+
+                            <f:validateRegex
+                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+                        </p:inputText>
+                        
+                        <h:outputLabel id="outLblUserNameId" 
+                                       for="userName" >
+                        </h:outputLabel>
+                    </div>
+
+                    <div id="regFreelancerPassContId">
+                        <h:outputText id="outTxtPasswordId" 
+                                      value="Password: " >
+                        </h:outputText>
+
+                        <h:inputSecret id="password"  
+                                       required="true" 
+                                       value="#{freelancerRegistrationAction.password}" 
+                                       requiredMessage="Please enter password">
+                        </h:inputSecret>
+
+                        <h:outputLabel id="outLblPasswordId" 
+                                       for="password" >
+                        </h:outputLabel>
+
+                        <h:outputText id="outTxtPasswordConfirmId" 
+                                      value="Password: " >
+                        </h:outputText>
+
+                        <h:inputSecret id="passwordConfirm"  
+                                       required="true" 
+                                       value="#{freelancerRegistrationAction.matchingPassword}" 
+                                       requiredMessage="Please repeat password">
+                        </h:inputSecret>
+
+                        <h:outputLabel id="outLblPasswordConfirmId" 
+                                       for="password" >
+                        </h:outputLabel>
+                    </div>
+
+                </div>
+
+                <div id="registerBtnPanelId">
+                    <p:commandButton id="btnRegisterId" 
+                                     value="Login" 
+                                     action="#{freelancerRegistrationAction.register}" 
+                                     styleClass="registerPanelBtn">
+                    </p:commandButton>
+
+                    <p:commandButton id="btnCancelId" 
+                                     value="Cancel" 
+                                     action="#{freelancerRegistrationAction.cancel}" 
+                                     styleClass="loginPanelBtn" 
+                                     immediate="true" 
+                                     update="regFreelancerFormmId">
+                    </p:commandButton>
+
+                </div>
+
+            </h:form>
+
+        </div>
+
+        <div>
+            <h:messages></h:messages>
+        </div>
+    </h:body>
+</html>

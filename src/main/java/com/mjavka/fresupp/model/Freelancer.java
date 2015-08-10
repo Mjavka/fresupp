@@ -18,7 +18,6 @@ import org.hibernate.annotations.Type;
  */
 @Entity
 @Table(name="FREELANCE_TB")
-@ManagedBean(name="freelancer")
 public class Freelancer implements Serializable 
 {
     @Id

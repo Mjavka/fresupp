@@ -1,10 +1,9 @@
 package com.mjavka.fresupp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.faces.bean.ManagedBean;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,60 +16,88 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
- 
+
 /**
- * Entity bean with JPA annotations
- * Hibernate provides JPA implementation
+ * Entity bean with JPA annotations Hibernate provides JPA implementation
+ *
  * @author mjavka
  *
  */
 @Entity
-@Table(name="LOGIN_TB")
-@ManagedBean(name="login")
-public class Login implements Serializable 
+@Table(name = "LOGIN_TB")
+public class Login implements Serializable
 {
+
     public Login()
     {
-        
+
     }
-    
+
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     @Column(name = "object_uuid", unique = true)
-    @Type(type="pg-uuid")
+    @Type(type = "pg-uuid")
     private java.util.UUID uuid;
-    
+
     @Column(name = "email")
     private String email;
-    
+
     @Column(name = "password")
     private String password;
-    
+
     @Column(name = "username")
     private String username;
-    
+
     @Column(name = "reg_date")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date regDate;
-    
-    @Column(name= "active")
+
+    @Column(name = "active")
     private Boolean active;
-    
+
     @Column(name = "last_login")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastLogin;
-    
+
     @Column(name = "status")
     private String status;
 
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="LOGIN_ROLE_REF",
-        joinColumns = {@JoinColumn(name="login_uuid", referencedColumnName="object_uuid")},
-        inverseJoinColumns = {@JoinColumn(name="role_uuid", referencedColumnName="object_uuid")}
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "LOGIN_ROLE_REF",
+            joinColumns =
+            {
+
+                @JoinColumn(name = "login_uuid", referencedColumnName = "object_uuid")
+            },
+            inverseJoinColumns =
+            {
+
+                @JoinColumn(name = "role_uuid", referencedColumnName = "object_uuid")
+            }
     )
-    private Set<Role> roles = new HashSet<Role>(0);
-    
+    private List<Role> roles = new ArrayList<Role>(0);
+
+    public void addRole(Role b)
+    {
+        if (b != null)
+        {
+            if (getRoles().contains(b))
+            {
+                getRoles().set(getRoles().indexOf(b), b);
+            } else
+            {
+                getRoles().add(b);
+            }
+        }
+    }
+
+    public void removeRole(Role b)
+    {
+        getRoles().remove(b);
+        b.setLogin(null);
+    }
+
     public java.util.UUID getUuid()
     {
         return uuid;
@@ -150,18 +177,19 @@ public class Login implements Serializable
     {
         this.status = status;
     }
-    
+
     @Override
-    public String toString(){
-        return "uuid="+uuid+", username="+username;
+    public String toString()
+    {
+        return "uuid=" + uuid + ", username=" + username;
     }
 
-    public Set<Role> getRoles()
+    public List<Role> getRoles()
     {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles)
+    public void setRoles(List<Role> roles)
     {
         this.roles = roles;
     }

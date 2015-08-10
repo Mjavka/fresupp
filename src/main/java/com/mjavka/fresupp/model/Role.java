@@ -1,7 +1,6 @@
 package com.mjavka.fresupp.model;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,13 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import java.util.UUID;
-import javax.persistence.CascadeType;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 /**
  * Entity bean with JPA annotations
@@ -24,10 +21,7 @@ import javax.persistence.OneToOne;
  *
  */
 @Entity
-@Table(name = "ROLE_TB", uniqueConstraints = @UniqueConstraint(columnNames =
-{
-    "name", "object_uuid"
-}))
+@Table(name = "ROLE_TB")
 public class Role implements Serializable
 {
 
@@ -45,6 +39,27 @@ public class Role implements Serializable
     public Role()
     {
         
+    }
+    
+    
+    @ManyToOne(targetEntity = Login.class)
+    @JoinTable(name="LOGIN_ROLE_REF",
+        joinColumns = {
+            
+            @JoinColumn(name="role_uuid", referencedColumnName = "object_uuid")},
+        
+        inverseJoinColumns = {
+            
+            @JoinColumn(name="login_uuid", referencedColumnName = "object_uuid")
+        }
+    )
+    private Login login;
+    
+    public Role(String role, UUID uuid)
+    {
+        this.role = role;
+        
+        this.uuid = uuid;
     }
     
     public UUID getUuid()
@@ -66,5 +81,17 @@ public class Role implements Serializable
     {
         this.role = role;
     }
+
+    public Login getLogin()
+    {
+        return login;
+    }
+
+    public void setLogin(Login login)
+    {
+        this.login = login;
+    }
+    
+    
 
 }

@@ -32,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException
     {
 
-        com.mjavka.fresupp.model.Login domainUser = loginDAO.getLogin(login);
+        com.mjavka.fresupp.model.Login domainUser = loginDAO.findByUsername(login);
 
         boolean enabled = true;
         boolean accountNonExpired = true;
@@ -50,7 +50,7 @@ public class CustomUserDetailsService implements UserDetailsService
         );
     }
 
-    public Collection<? extends GrantedAuthority> getAuthorities(Set<Role> dbRoles)
+    public Collection<? extends GrantedAuthority> getAuthorities(List<Role> dbRoles)
     {
 
         List<GrantedAuthority> authList = getGrantedAuthorities(getRoles(dbRoles));
@@ -58,7 +58,7 @@ public class CustomUserDetailsService implements UserDetailsService
         return authList;
     }
 
-    public List<String> getRoles(Set<Role> dbRoles)
+    public List<String> getRoles(List<Role> dbRoles)
     {
 
         List<String> roles = new ArrayList<String>();

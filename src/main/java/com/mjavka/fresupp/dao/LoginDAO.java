@@ -7,7 +7,11 @@ import com.mjavka.fresupp.model.Login;
 public interface LoginDAO {
  
     public void addLogin(Login p);
+    
     public List<Login> listLogin();
     
-    Login getLogin(String username);
+    
+    public Login findByUsername(String username);
+    
+    public Login findByEmail(String email);
 }
