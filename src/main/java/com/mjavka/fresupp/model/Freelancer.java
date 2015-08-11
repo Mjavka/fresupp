@@ -1,11 +1,14 @@
 package com.mjavka.fresupp.model;
 
 import java.io.Serializable;
-import javax.faces.bean.ManagedBean;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -31,6 +34,10 @@ public class Freelancer implements Serializable
     private java.util.UUID loginUuid;
     
     
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "freelancersList")
+    private List<Order> orderList = new ArrayList<Order>();
+    
+    
 
     public java.util.UUID getUuid()
     {
@@ -51,11 +58,23 @@ public class Freelancer implements Serializable
     {
         this.loginUuid = loginUuid;
     }
-     
+    
+    public List<Order> getOrderList()
+    {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList)
+    {
+        this.orderList = orderList;
+    }
+    
     @Override
     public String toString(){
         return "uuid="+uuid+", freelancerUuid="+loginUuid;
     }
+
+   
 
     
 }

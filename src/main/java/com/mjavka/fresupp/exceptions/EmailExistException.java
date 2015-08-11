@@ -1,4 +1,4 @@
-package com.mjavka.fresupp.actions.exceptions;
+package com.mjavka.fresupp.exceptions;
 
 /**
  *

@@ -107,15 +107,27 @@ CREATE TABLE frelancer_file_ref (
 ALTER TABLE public.frelancer_file_ref OWNER TO postgres;
 
 --
+-- Name: login_role_ref; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE login_role_ref (
+    login_uuid uuid,
+    role_uuid uuid NOT NULL
+);
+
+
+ALTER TABLE public.login_role_ref OWNER TO postgres;
+
+--
 -- Name: login_tb; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE login_tb (
     object_uuid uuid NOT NULL,
     email text,
-    password_h text,
+    password text,
     username character varying(30),
-    reg_date date,
+    reg_date timestamp with time zone DEFAULT now(),
     active boolean,
     last_login timestamp with time zone,
     status character varying(2)
@@ -161,20 +173,70 @@ CREATE TABLE order_file_ref (
 ALTER TABLE public.order_file_ref OWNER TO postgres;
 
 --
+-- Name: order_freelancer_ref; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE order_freelancer_ref (
+    order_uuid uuid,
+    freelancer_uuid uuid
+);
+
+
+ALTER TABLE public.order_freelancer_ref OWNER TO postgres;
+
+--
+-- Name: order_manager_ref; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE order_manager_ref (
+    order_uuid uuid,
+    manager_uuid uuid
+);
+
+
+ALTER TABLE public.order_manager_ref OWNER TO postgres;
+
+--
+-- Name: order_task_ref; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE order_task_ref (
+    order_uuid uuid,
+    task_uuid uuid
+);
+
+
+ALTER TABLE public.order_task_ref OWNER TO postgres;
+
+--
 -- Name: order_tb; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE order_tb (
     object_uuid uuid NOT NULL,
-    manager_ref uuid NOT NULL,
     customer_ref uuid NOT NULL,
     creation_date timestamp with time zone NOT NULL,
     description text,
-    name text
+    name text,
+    deadline_date timestamp with time zone,
+    status integer,
+    type text
 );
 
 
 ALTER TABLE public.order_tb OWNER TO postgres;
+
+--
+-- Name: role_tb; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE role_tb (
+    object_uuid uuid NOT NULL,
+    name text NOT NULL
+);
+
+
+ALTER TABLE public.role_tb OWNER TO postgres;
 
 --
 -- Name: skill_task_ref; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
@@ -182,8 +244,7 @@ ALTER TABLE public.order_tb OWNER TO postgres;
 
 CREATE TABLE skill_task_ref (
     skill_uuid uuid NOT NULL,
-    task_uuid uuid NOT NULL,
-    required_level double precision
+    task_uuid uuid NOT NULL
 );
 
 
@@ -235,9 +296,11 @@ ALTER TABLE public.solution_tb OWNER TO postgres;
 
 CREATE TABLE task_tb (
     object_uuid uuid NOT NULL,
-    order_ref uuid NOT NULL,
     description text,
-    creation_date timestamp with time zone NOT NULL
+    creation_date timestamp with time zone NOT NULL,
+    deadline_date timestamp with time zone,
+    name character varying(100),
+    skill_level integer
 );
 
 
@@ -318,12 +381,22 @@ COPY frelancer_file_ref (freelancer_uuid, file_uuid) FROM stdin;
 
 
 --
+-- Data for Name: login_role_ref; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY login_role_ref (login_uuid, role_uuid) FROM stdin;
+ce8c7d1d-28eb-4201-b83c-37ee17316186	a390e388-3ce6-11e5-a808-cfc3b31c6443
+d02da266-c64e-4eff-be60-3ed26c18dc45	a390e388-3ce6-11e5-a808-cfc3b31c6443
+\.
+
+
+--
 -- Data for Name: login_tb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY login_tb (object_uuid, email, password_h, username, reg_date, active, last_login, status) FROM stdin;
-827938cb-2151-47a7-ae9b-d6adc45b3561	some.item@gmail.com	\N	userOne	\N	\N	\N	\N
-33fbe8a3-2f15-4a9b-a5bf-78b5d24b62b0	fumosync@gmail.com	\N	userTwo	\N	\N	\N	\N
+COPY login_tb (object_uuid, email, password, username, reg_date, active, last_login, status) FROM stdin;
+ce8c7d1d-28eb-4201-b83c-37ee17316186	email@gmail.com	12345	uname	2015-08-10 00:00:00+03	\N	\N	\N
+d02da266-c64e-4eff-be60-3ed26c18dc45	email@gmail.com	12345	uname2	2015-08-10 00:00:00+03	\N	\N	\N
 \.
 
 
@@ -352,10 +425,45 @@ COPY order_file_ref (order_uuid, file_uuid) FROM stdin;
 
 
 --
+-- Data for Name: order_freelancer_ref; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY order_freelancer_ref (order_uuid, freelancer_uuid) FROM stdin;
+\.
+
+
+--
+-- Data for Name: order_manager_ref; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY order_manager_ref (order_uuid, manager_uuid) FROM stdin;
+\.
+
+
+--
+-- Data for Name: order_task_ref; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY order_task_ref (order_uuid, task_uuid) FROM stdin;
+\.
+
+
+--
 -- Data for Name: order_tb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY order_tb (object_uuid, manager_ref, customer_ref, creation_date, description, name) FROM stdin;
+COPY order_tb (object_uuid, customer_ref, creation_date, description, name, deadline_date, status, type) FROM stdin;
+\.
+
+
+--
+-- Data for Name: role_tb; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY role_tb (object_uuid, name) FROM stdin;
+ffbf4dee-3ce5-11e5-aec3-c7412f8e153f	ROLE_MODERATOR
+91a1c958-3ce6-11e5-87ac-df76351b03db	ROLE_ADMIN
+a390e388-3ce6-11e5-a808-cfc3b31c6443	ROLE_USER
 \.
 
 
@@ -363,7 +471,7 @@ COPY order_tb (object_uuid, manager_ref, customer_ref, creation_date, descriptio
 -- Data for Name: skill_task_ref; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY skill_task_ref (skill_uuid, task_uuid, required_level) FROM stdin;
+COPY skill_task_ref (skill_uuid, task_uuid) FROM stdin;
 \.
 
 
@@ -395,7 +503,7 @@ COPY solution_tb (object_uuid, task_ref, creation_date, status, description) FRO
 -- Data for Name: task_tb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY task_tb (object_uuid, order_ref, description, creation_date) FROM stdin;
+COPY task_tb (object_uuid, description, creation_date, deadline_date, name, skill_level) FROM stdin;
 \.
 
 
@@ -445,6 +553,14 @@ ALTER TABLE ONLY freelanser_task_ref
 
 ALTER TABLE ONLY frelancer_file_ref
     ADD CONSTRAINT frelancer_file_ref_pkey PRIMARY KEY (freelancer_uuid, file_uuid);
+
+
+--
+-- Name: idx_login_role_ref; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY login_role_ref
+    ADD CONSTRAINT idx_login_role_ref UNIQUE (login_uuid, role_uuid);
 
 
 --
@@ -512,6 +628,14 @@ ALTER TABLE ONLY order_tb
 
 
 --
+-- Name: pk_role_table; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY role_tb
+    ADD CONSTRAINT pk_role_table UNIQUE (object_uuid);
+
+
+--
 -- Name: pk_skills_table; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -541,6 +665,14 @@ ALTER TABLE ONLY task_tb
 
 ALTER TABLE ONLY technical_task_tb
     ADD CONSTRAINT pk_technical_task_tb PRIMARY KEY (object_uuid);
+
+
+--
+-- Name: role_tb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY role_tb
+    ADD CONSTRAINT role_tb_pkey PRIMARY KEY (object_uuid, name);
 
 
 --
@@ -617,6 +749,20 @@ CREATE INDEX idx_frelancer_file_ref_0 ON frelancer_file_ref USING btree (file_uu
 
 
 --
+-- Name: idx_login_role_ref_0; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX idx_login_role_ref_0 ON login_role_ref USING btree (login_uuid);
+
+
+--
+-- Name: idx_login_role_ref_1; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX idx_login_role_ref_1 ON login_role_ref USING btree (role_uuid);
+
+
+--
 -- Name: idx_manager_skills_ref; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -652,10 +798,45 @@ CREATE INDEX idx_order_file_ref_0 ON order_file_ref USING btree (file_uuid);
 
 
 --
--- Name: idx_order_tb; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: idx_order_freelancer_ref; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE INDEX idx_order_tb ON order_tb USING btree (manager_ref);
+CREATE INDEX idx_order_freelancer_ref ON order_freelancer_ref USING btree (order_uuid);
+
+
+--
+-- Name: idx_order_freelancer_ref_0; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX idx_order_freelancer_ref_0 ON order_freelancer_ref USING btree (freelancer_uuid);
+
+
+--
+-- Name: idx_order_manager_ref; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX idx_order_manager_ref ON order_manager_ref USING btree (order_uuid);
+
+
+--
+-- Name: idx_order_manager_ref_0; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX idx_order_manager_ref_0 ON order_manager_ref USING btree (manager_uuid);
+
+
+--
+-- Name: idx_order_task_ref; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX idx_order_task_ref ON order_task_ref USING btree (order_uuid);
+
+
+--
+-- Name: idx_order_task_ref_0; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX idx_order_task_ref_0 ON order_task_ref USING btree (task_uuid);
 
 
 --
@@ -698,13 +879,6 @@ CREATE INDEX idx_solution_file_ref_0 ON solution_file_ref USING btree (solution_
 --
 
 CREATE INDEX idx_solution_table ON solution_tb USING btree (task_ref);
-
-
---
--- Name: idx_task_tb; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE INDEX idx_task_tb ON task_tb USING btree (order_ref);
 
 
 --
@@ -793,6 +967,22 @@ ALTER TABLE ONLY frelancer_file_ref
 
 
 --
+-- Name: fk_login_role_ref; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY login_role_ref
+    ADD CONSTRAINT fk_login_role_ref FOREIGN KEY (login_uuid) REFERENCES login_tb(object_uuid);
+
+
+--
+-- Name: fk_login_role_ref_0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY login_role_ref
+    ADD CONSTRAINT fk_login_role_ref_0 FOREIGN KEY (role_uuid) REFERENCES role_tb(object_uuid);
+
+
+--
 -- Name: fk_manager_skills_ref; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -833,11 +1023,51 @@ ALTER TABLE ONLY order_file_ref
 
 
 --
--- Name: fk_order_tb; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fk_order_freelancer_ref; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY order_tb
-    ADD CONSTRAINT fk_order_tb FOREIGN KEY (manager_ref) REFERENCES manager_tb(object_uuid);
+ALTER TABLE ONLY order_freelancer_ref
+    ADD CONSTRAINT fk_order_freelancer_ref FOREIGN KEY (order_uuid) REFERENCES order_tb(object_uuid);
+
+
+--
+-- Name: fk_order_freelancer_ref_0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY order_freelancer_ref
+    ADD CONSTRAINT fk_order_freelancer_ref_0 FOREIGN KEY (freelancer_uuid) REFERENCES freelance_tb(object_uuid);
+
+
+--
+-- Name: fk_order_manager_ref; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY order_manager_ref
+    ADD CONSTRAINT fk_order_manager_ref FOREIGN KEY (order_uuid) REFERENCES order_tb(object_uuid);
+
+
+--
+-- Name: fk_order_manager_ref_0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY order_manager_ref
+    ADD CONSTRAINT fk_order_manager_ref_0 FOREIGN KEY (manager_uuid) REFERENCES manager_tb(object_uuid);
+
+
+--
+-- Name: fk_order_task_ref; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY order_task_ref
+    ADD CONSTRAINT fk_order_task_ref FOREIGN KEY (order_uuid) REFERENCES order_tb(object_uuid);
+
+
+--
+-- Name: fk_order_task_ref_0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY order_task_ref
+    ADD CONSTRAINT fk_order_task_ref_0 FOREIGN KEY (task_uuid) REFERENCES task_tb(object_uuid);
 
 
 --
@@ -886,14 +1116,6 @@ ALTER TABLE ONLY solution_file_ref
 
 ALTER TABLE ONLY solution_tb
     ADD CONSTRAINT fk_solution_table FOREIGN KEY (task_ref) REFERENCES task_tb(object_uuid);
-
-
---
--- Name: fk_task_tb; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY task_tb
-    ADD CONSTRAINT fk_task_tb FOREIGN KEY (order_ref) REFERENCES order_tb(object_uuid) ON DELETE RESTRICT;
 
 
 --

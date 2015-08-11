@@ -1,7 +1,7 @@
 package com.mjavka.fresupp.service;
 
-import com.mjavka.fresupp.actions.exceptions.EmailExistException;
-import com.mjavka.fresupp.actions.exceptions.UsernameExistException;
+import com.mjavka.fresupp.exceptions.EmailExistException;
+import com.mjavka.fresupp.exceptions.UsernameExistException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -62,6 +62,8 @@ public class LoginServiceImpl implements LoginService
         login.setPassword(loginDto.getPassword());
 
         login.setEmail(loginDto.getEmail());
+        
+        login.setActive(false);
         
         loginDAO.addLogin(login);
     }

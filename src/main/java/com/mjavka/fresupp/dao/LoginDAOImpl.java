@@ -1,6 +1,6 @@
 package com.mjavka.fresupp.dao;
 
-import com.mjavka.fresupp.actions.exceptions.EmailExistException;
+import com.mjavka.fresupp.exceptions.EmailExistException;
 import java.util.List;
 
 import org.hibernate.Session;

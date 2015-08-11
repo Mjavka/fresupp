@@ -1,11 +1,15 @@
 package com.mjavka.fresupp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -30,7 +34,8 @@ public class Manager implements Serializable
     @Column(name = "login_ref")
     private java.util.UUID loginUuid;
     
-    
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "managerList")
+    private List<Order> orderList = new ArrayList<Order>();
 
     public java.util.UUID getUuid()
     {
@@ -55,6 +60,16 @@ public class Manager implements Serializable
     @Override
     public String toString(){
         return "uuid="+uuid+", loginUuid="+loginUuid;
+    }
+
+    public List<Order> getOrderList()
+    {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList)
+    {
+        this.orderList = orderList;
     }
 
     
