@@ -5,12 +5,11 @@ import com.mjavka.fresupp.exceptions.UsernameExistException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.mjavka.fresupp.dao.LoginDAO;
-import com.mjavka.fresupp.dto.LoginDTO;
 import com.mjavka.fresupp.model.Login;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("loginService")
 @Transactional(readOnly = true)
@@ -37,35 +36,27 @@ public class LoginServiceImpl implements LoginService
         return this.loginDAO.findByUsername(username);
     }
 
-    @Transactional(readOnly = false)
     @Override
-    public void registerNewUserAccount(LoginDTO loginDto)  throws EmailExistException, UsernameExistException
+    @Transactional(readOnly = false)
+    public Login registerNewLogin(Login login) throws EmailExistException, UsernameExistException
     {
-        if (emailExist(loginDto.getEmail()))
+        if (emailExist(login.getEmail()))
         {
             throw new EmailExistException(
-            "There is an account with that email address:"
-              + loginDto.getEmail());
-        }   
-        
-        if (usernameExist(loginDto.getUsername()))
+                    "There is an account with that email address:"
+                    + login.getEmail());
+        }
+
+        if (usernameExist(login.getUsername()))
         {
             throw new EmailExistException(
-            "There is an account with that username:"
-              + loginDto.getUsername());
-        } 
+                    "There is an account with that username:"
+                    + login.getUsername());
+        }
 
-        Login login = new Login();
-
-        login.setUsername(loginDto.getUsername());
-
-        login.setPassword(loginDto.getPassword());
-
-        login.setEmail(loginDto.getEmail());
-        
-        login.setActive(false);
-        
         loginDAO.addLogin(login);
+
+        return loginDAO.findByUsername(login.getUsername());
     }
 
     private boolean emailExist(String email)
@@ -78,7 +69,7 @@ public class LoginServiceImpl implements LoginService
         }
         return false;
     }
-    
+
     private boolean usernameExist(String username)
     {
         Login login = loginDAO.findByUsername(username);

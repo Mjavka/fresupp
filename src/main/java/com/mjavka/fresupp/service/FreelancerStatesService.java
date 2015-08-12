@@ -1,6 +1,6 @@
 package com.mjavka.fresupp.service;
 
-import com.mjavka.fresupp.dao.FreelancerDAO;
+import com.mjavka.fresupp.dto.FreelancerDTO;
 
 /**
  *
@@ -8,8 +8,8 @@ import com.mjavka.fresupp.dao.FreelancerDAO;
  */
 public interface FreelancerStatesService
 {
-    public boolean makePremium(FreelancerDAO freelancerDAO);
+    public boolean makePremium(FreelancerDTO freelancerDTO);
     
-    public boolean makeUnPremium(FreelancerDAO freelancerDAO);
+    public boolean makeUnPremium(FreelancerDTO freelancerDTO);
     
 }

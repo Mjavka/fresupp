@@ -12,5 +12,5 @@ public interface LoginService {
     
     public Login getLogin(String username);
     
-    public void registerNewUserAccount(LoginDTO loginDto) throws EmailExistException; 
+    public Login registerNewLogin(Login login) throws EmailExistException; 
 }

@@ -10,13 +10,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mjavka.fresupp.model.Freelancer;
+import com.mjavka.fresupp.model.Login;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 @ManagedBean(name="freelancerService")
 @SessionScoped
 public class FreelancerServiceImpl implements FreelancerService {
 
-	private FreelancerDAO freelancerDAO;
+    @Autowired
+    private FreelancerDAO freelancerDAO;
 	 
     public void setFreelancerDAO(FreelancerDAO freelancererDAO) {
         this.freelancerDAO = freelancererDAO;
@@ -32,6 +35,12 @@ public class FreelancerServiceImpl implements FreelancerService {
     @Transactional
     public List<Freelancer> listFreelancer() {
         return this.freelancerDAO.listFreelancer();
+    }
+
+    @Override
+    public void addNewFreelancer(Login login)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
  
 }

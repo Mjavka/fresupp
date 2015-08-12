@@ -232,7 +232,7 @@ ALTER TABLE public.order_tb OWNER TO postgres;
 
 CREATE TABLE role_tb (
     object_uuid uuid NOT NULL,
-    name text NOT NULL
+    name character varying(100)
 );
 
 
@@ -353,6 +353,8 @@ COPY file_tb (object_uuid, file_type, file_path, original_name, mime_type, add_t
 --
 
 COPY freelance_tb (object_uuid, login_ref) FROM stdin;
+a5df32dd-1292-42fb-a2c0-5dc077f001a6	37cc58a5-2068-4f41-bc8c-eee2427d50b3
+26246a9c-457e-43c4-8f29-d029f3214a42	2f7314f0-7b10-440e-9e99-5f254bf84994
 \.
 
 
@@ -387,6 +389,8 @@ COPY frelancer_file_ref (freelancer_uuid, file_uuid) FROM stdin;
 COPY login_role_ref (login_uuid, role_uuid) FROM stdin;
 ce8c7d1d-28eb-4201-b83c-37ee17316186	a390e388-3ce6-11e5-a808-cfc3b31c6443
 d02da266-c64e-4eff-be60-3ed26c18dc45	a390e388-3ce6-11e5-a808-cfc3b31c6443
+37cc58a5-2068-4f41-bc8c-eee2427d50b3	a390e388-3ce6-11e5-a808-cfc3b31c6443
+2f7314f0-7b10-440e-9e99-5f254bf84994	a390e388-3ce6-11e5-a808-cfc3b31c6443
 \.
 
 
@@ -397,6 +401,8 @@ d02da266-c64e-4eff-be60-3ed26c18dc45	a390e388-3ce6-11e5-a808-cfc3b31c6443
 COPY login_tb (object_uuid, email, password, username, reg_date, active, last_login, status) FROM stdin;
 ce8c7d1d-28eb-4201-b83c-37ee17316186	email@gmail.com	12345	uname	2015-08-10 00:00:00+03	\N	\N	\N
 d02da266-c64e-4eff-be60-3ed26c18dc45	email@gmail.com	12345	uname2	2015-08-10 00:00:00+03	\N	\N	\N
+37cc58a5-2068-4f41-bc8c-eee2427d50b3	fl@gmail.com	12345	freelancer1	2015-08-12 00:00:00+03	f	\N	\N
+2f7314f0-7b10-440e-9e99-5f254bf84994	fl2@gmail.com	12345	freelancer2	2015-08-12 00:00:00+03	f	\N	\N
 \.
 
 
@@ -461,9 +467,9 @@ COPY order_tb (object_uuid, customer_ref, creation_date, description, name, dead
 --
 
 COPY role_tb (object_uuid, name) FROM stdin;
+a390e388-3ce6-11e5-a808-cfc3b31c6443	ROLE_USER
 ffbf4dee-3ce5-11e5-aec3-c7412f8e153f	ROLE_MODERATOR
 91a1c958-3ce6-11e5-87ac-df76351b03db	ROLE_ADMIN
-a390e388-3ce6-11e5-a808-cfc3b31c6443	ROLE_USER
 \.
 
 
@@ -628,11 +634,11 @@ ALTER TABLE ONLY order_tb
 
 
 --
--- Name: pk_role_table; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: pk_role_tb; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY role_tb
-    ADD CONSTRAINT pk_role_table UNIQUE (object_uuid);
+    ADD CONSTRAINT pk_role_tb PRIMARY KEY (object_uuid);
 
 
 --
@@ -665,14 +671,6 @@ ALTER TABLE ONLY task_tb
 
 ALTER TABLE ONLY technical_task_tb
     ADD CONSTRAINT pk_technical_task_tb PRIMARY KEY (object_uuid);
-
-
---
--- Name: role_tb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY role_tb
-    ADD CONSTRAINT role_tb_pkey PRIMARY KEY (object_uuid, name);
 
 
 --
@@ -972,14 +970,6 @@ ALTER TABLE ONLY frelancer_file_ref
 
 ALTER TABLE ONLY login_role_ref
     ADD CONSTRAINT fk_login_role_ref FOREIGN KEY (login_uuid) REFERENCES login_tb(object_uuid);
-
-
---
--- Name: fk_login_role_ref_0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY login_role_ref
-    ADD CONSTRAINT fk_login_role_ref_0 FOREIGN KEY (role_uuid) REFERENCES role_tb(object_uuid);
 
 
 --

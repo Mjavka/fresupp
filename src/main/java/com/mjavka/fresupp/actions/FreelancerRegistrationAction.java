@@ -1,6 +1,8 @@
 package com.mjavka.fresupp.actions;
 
 import com.mjavka.fresupp.dto.LoginDTO;
+import com.mjavka.fresupp.service.AccountStatesService;
+import com.mjavka.fresupp.service.FreelancerStatesService;
 import com.mjavka.fresupp.service.LoginService;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
@@ -20,8 +22,9 @@ public class FreelancerRegistrationAction extends AbstractRegistrationAction imp
 {
     private static final Logger logger = LoggerFactory.getLogger(FreelancerRegistrationAction.class);
     
-    @ManagedProperty(value = "#{loginService}")
-    private LoginService loginService = null;
+    @ManagedProperty(value = "#{freelancerStatesService}")
+    
+    private AccountStatesService accountStatesService;
 
     private LoginDTO loginDTO = new LoginDTO();
 
@@ -33,7 +36,7 @@ public class FreelancerRegistrationAction extends AbstractRegistrationAction imp
         
         try
         {
-            loginService.registerNewUserAccount(loginDTO);
+            getAccountStatesService().register(loginDTO);
         } catch (Exception ex)
         {
             logger.error("error registering ", ex);
@@ -54,16 +57,6 @@ public class FreelancerRegistrationAction extends AbstractRegistrationAction imp
         return "loggedout";
     }
 
-    public LoginService getLoginService()
-    {
-        return loginService;
-    }
-
-    public void setLoginService(LoginService loginService)
-    {
-        this.loginService = loginService;
-    }
-
     public LoginDTO getLoginDTO()
     {
         return loginDTO;
@@ -72,6 +65,16 @@ public class FreelancerRegistrationAction extends AbstractRegistrationAction imp
     public void setLoginDTO(LoginDTO loginDTO)
     {
         this.loginDTO = loginDTO;
+    }
+
+    public AccountStatesService getAccountStatesService()
+    {
+        return accountStatesService;
+    }
+
+    public void setAccountStatesService(AccountStatesService accountStatesService)
+    {
+        this.accountStatesService = accountStatesService;
     }
 
 }
