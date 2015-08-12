@@ -3,22 +3,22 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-          
-  <h:head>
-       <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/main.css" />
-        <script type="text/javascript" src="#{request.contextPath}/javascript/jquery-1.11.3.js"></script>
-        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/bootstrap/css/bootstrap.css" />
-        <script type="text/javascript" src="#{request.contextPath}/css/bootstrap/js/bootstrap.js"></script>
-      <title>fresupp</title>
-      <ui:insert name="head"></ui:insert>
-  </h:head>  
-  <h:body>
-        
+
+    <h:head>
+        <h:outputStylesheet library="css" name="main.css" />
+        <h:outputScript library="javascript" name="jquery-1.11.3.js" />
+        <h:outputStylesheet library="css" name="bootstrap/css/bootstrap.css" />
+        <h:outputScript library="css" name="bootstrap/js/bootstrap.js" />
+        <title>fresupp</title>
+        <ui:insert name="head"></ui:insert>
+    </h:head>  
+    <h:body>
+
         <div id="main" class="content">
-                    <ui:insert name="body"></ui:insert>
+            <ui:insert name="body"></ui:insert>
         </div>
-      <div class="footer">
-          
-      </div>
-  </h:body>
+        <div class="footer">
+
+        </div>
+    </h:body>
 </html>
