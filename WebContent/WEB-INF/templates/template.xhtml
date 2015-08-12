@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+          
+  <h:head>
+       <link rel="stylesheet" type="text/css" href="./styles/main.css" />
+        <script type="text/javascript" src="#{request.contextPath}/scripts/jquery-1.11.3.js"></script>
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/styles/bootstrap/css/bootstrap.css" />
+        <script type="text/javascript" src="#{request.contextPath}/styles/bootstrap/js/bootstrap.js"></script>
+      <title>fresupp</title>
+      <ui:insert name="head"></ui:insert>
+  </h:head>  
+  <h:body>
+        
+        <div id="main" class="content">
+                    <ui:insert name="body"></ui:insert>
+        </div>
+      <div class="footer">
+          
+      </div>
+  </h:body>
+</html>
