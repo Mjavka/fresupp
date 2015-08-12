@@ -19,21 +19,16 @@ public class LoginServiceImpl implements LoginService
     @Autowired
     private LoginDAO loginDAO;
 
-    public void setLoginDAO(LoginDAO loginDAO)
-    {
-        this.loginDAO = loginDAO;
-    }
-
     @Override
     public List<Login> listLogin()
     {
-        return this.loginDAO.listLogin();
+        return this.getLoginDAO().listLogin();
     }
 
     @Override
     public Login getLogin(String username)
     {
-        return this.loginDAO.findByUsername(username);
+        return this.getLoginDAO().findByUsername(username);
     }
 
     @Override
@@ -54,14 +49,14 @@ public class LoginServiceImpl implements LoginService
                     + login.getUsername());
         }
 
-        loginDAO.addLogin(login);
+        getLoginDAO().addLogin(login);
 
-        return loginDAO.findByUsername(login.getUsername());
+        return getLoginDAO().findByUsername(login.getUsername());
     }
 
     private boolean emailExist(String email)
     {
-        Login login = loginDAO.findByEmail(email);
+        Login login = getLoginDAO().findByEmail(email);
 
         if (login != null)
         {
@@ -72,13 +67,23 @@ public class LoginServiceImpl implements LoginService
 
     private boolean usernameExist(String username)
     {
-        Login login = loginDAO.findByUsername(username);
+        Login login = getLoginDAO().findByUsername(username);
 
         if (login != null)
         {
             return true;
         }
         return false;
+    }
+
+    public LoginDAO getLoginDAO()
+    {
+        return loginDAO;
+    }
+
+    public void setLoginDAO(LoginDAO loginDAO)
+    {
+        this.loginDAO = loginDAO;
     }
 
 }

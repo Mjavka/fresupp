@@ -1,7 +1,6 @@
 package com.mjavka.fresupp.service;
 
 import com.mjavka.fresupp.exceptions.EmailExistException;
-import com.mjavka.fresupp.dto.LoginDTO;
 import java.util.List;
 
 import com.mjavka.fresupp.model.Login;

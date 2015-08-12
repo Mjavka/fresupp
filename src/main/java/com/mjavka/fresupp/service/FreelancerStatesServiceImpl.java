@@ -15,47 +15,51 @@ import org.springframework.transaction.annotation.Transactional;
  * @author mjavka
  */
 @Service("freelancerStatesService")
-public class FreelancerStatesServiceImpl implements AccountStatesService,  FreelancerStatesService 
+public class FreelancerStatesServiceImpl implements AccountStatesService, FreelancerStatesService
 {
 
     @Autowired
     private FreelancerService freelancerService;
-    
+
     @Autowired
     private LoginService loginService;
-    
+
     @Autowired
     private RoleService roleService;
-    
+
     @Override
     @Transactional
     public boolean register(LoginDTO loginDTO)
     {
-        Login login = new Login();
-        
+        Login login = new Login(); //@TODO use LoginFactory instead
+
         login.setUsername(loginDTO.getUsername());
 
         login.setPassword(loginDTO.getPassword());
 
         login.setEmail(loginDTO.getEmail());
-        
+
         login.setActive(false);
-        
+
         Role role = roleService.getRoleByUuid(RoleDTO.USER);
-        
+
         login.addRole(role);
-        
-        login = getLoginService().registerNewLogin(login);
-        
+        try
+        {
+            login = getLoginService().registerNewLogin(login);
+        } catch (Exception ex)
+        {
+            //@TODO log exception
+        }
+
         Freelancer freelancer = new Freelancer(login);
-        
+
         //@TODO add freelancer specific info
-        
         getFreelancerService().addFreelancer(freelancer);
-        
+
         return true;
     }
-    
+
     @Override
     public boolean unregister(LoginDTO loginDTO)
     {
@@ -85,7 +89,6 @@ public class FreelancerStatesServiceImpl implements AccountStatesService,  Freel
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-   
 
     public FreelancerService getFreelancerService()
     {
@@ -117,6 +120,4 @@ public class FreelancerStatesServiceImpl implements AccountStatesService,  Freel
         this.roleService = roleService;
     }
 
-    
-    
 }

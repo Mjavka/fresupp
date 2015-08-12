@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.mjavka.fresupp.model.Order;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Repository
@@ -19,21 +20,39 @@ public class OrderDAOImpl implements OrderDAO
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sf)
-    {
-        this.sessionFactory = sf;
-    }
-
     @Override
     public void addOrder(Order p)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = this.sessionFactory.getCurrentSession();
+        
+        session.persist(p);
+        
+        logger.info("order saved successfully, Order Details=" + p);
     }
 
     @Override
     public List<Order> listOrder()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = this.sessionFactory.getCurrentSession();
+        
+        List<Order> ordersList = session.createQuery("from Order").list();
+        
+        for (Order p : ordersList)
+        {
+            logger.info("Login List::" + p);
+        }
+        
+        return ordersList;
+    }
+
+    public SessionFactory getSessionFactory()
+    {
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory)
+    {
+        this.sessionFactory = sessionFactory;
     }
 
     

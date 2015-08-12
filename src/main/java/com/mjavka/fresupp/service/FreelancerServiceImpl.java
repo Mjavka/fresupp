@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mjavka.fresupp.model.Freelancer;
-import com.mjavka.fresupp.model.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
@@ -37,10 +36,5 @@ public class FreelancerServiceImpl implements FreelancerService {
         return this.freelancerDAO.listFreelancer();
     }
 
-    @Override
-    public void addNewFreelancer(Login login)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
  
 }
