@@ -8,6 +8,10 @@ import java.util.UUID;
  */
 public class RoleDTO
 {
+    public static final UUID USER = UUID.fromString("a390e388-3ce6-11e5-a808-cfc3b31c6443");
+    public static final UUID MODERATOR = UUID.fromString("ffbf4dee-3ce5-11e5-aec3-c7412f8e153f");
+    public static final UUID ADMIN = UUID.fromString("91a1c958-3ce6-11e5-87ac-df76351b03db");
+    
     private UUID uuid;
 
     private String role;

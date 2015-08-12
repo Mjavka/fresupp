@@ -1,6 +1,5 @@
 package com.mjavka.fresupp.dao;
 
-import com.mjavka.fresupp.exceptions.EmailExistException;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -10,10 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.mjavka.fresupp.model.Login;
-import com.mjavka.fresupp.model.Role;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Repository
@@ -35,14 +32,11 @@ public class LoginDAOImpl implements LoginDAO
     {
         Session session = this.sessionFactory.getCurrentSession();
         
-        Role role = (Role) session.get(Role.class, UUID.fromString("a390e388-3ce6-11e5-a808-cfc3b31c6443"));
-        
-        p.addRole(role);
-        
         p.setRegDate(Calendar.getInstance().getTime());
+        
         session.persist(p);
         
-        logger.info("Person saved successfully, Person Details=" + p);
+        logger.info("Login saved successfully, Person Details=" + p);
     }
 
     @SuppressWarnings("unchecked")
@@ -50,11 +44,14 @@ public class LoginDAOImpl implements LoginDAO
     public List<Login> listLogin()
     {
         Session session = this.sessionFactory.getCurrentSession();
+        
         List<Login> loginsList = session.createQuery("from Login").list();
+        
         for (Login p : loginsList)
         {
             logger.info("Login List::" + p);
         }
+        
         return loginsList;
     }
 

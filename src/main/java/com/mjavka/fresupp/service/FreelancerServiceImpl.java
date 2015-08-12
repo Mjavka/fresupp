@@ -10,13 +10,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mjavka.fresupp.model.Freelancer;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 @ManagedBean(name="freelancerService")
 @SessionScoped
 public class FreelancerServiceImpl implements FreelancerService {
 
-	private FreelancerDAO freelancerDAO;
+    @Autowired
+    private FreelancerDAO freelancerDAO;
 	 
     public void setFreelancerDAO(FreelancerDAO freelancererDAO) {
         this.freelancerDAO = freelancererDAO;
@@ -33,5 +35,6 @@ public class FreelancerServiceImpl implements FreelancerService {
     public List<Freelancer> listFreelancer() {
         return this.freelancerDAO.listFreelancer();
     }
+
  
 }

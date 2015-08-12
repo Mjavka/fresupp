@@ -1,51 +1,123 @@
 package com.mjavka.fresupp.service;
 
-import com.mjavka.fresupp.dao.FreelancerDAO;
-import com.mjavka.fresupp.dao.LoginDAO;
+import com.mjavka.fresupp.dto.FreelancerDTO;
+import com.mjavka.fresupp.dto.LoginDTO;
+import com.mjavka.fresupp.dto.RoleDTO;
+import com.mjavka.fresupp.model.Freelancer;
+import com.mjavka.fresupp.model.Login;
+import com.mjavka.fresupp.model.Role;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author mjavka
  */
-@Service("freelancerRegistration")
-public class FreelancerStatesServiceImpl extends AbstractStatesService implements FreelancerStatesService 
+@Service("freelancerStatesService")
+public class FreelancerStatesServiceImpl implements AccountStatesService, FreelancerStatesService
 {
 
+    @Autowired
+    private FreelancerService freelancerService;
+
+    @Autowired
+    private LoginService loginService;
+
+    @Autowired
+    private RoleService roleService;
+
     @Override
-    public boolean register(LoginDAO loginDAO)
+    @Transactional
+    public boolean register(LoginDTO loginDTO)
+    {
+        Login login = new Login(); //@TODO use LoginFactory instead
+
+        login.setUsername(loginDTO.getUsername());
+
+        login.setPassword(loginDTO.getPassword());
+
+        login.setEmail(loginDTO.getEmail());
+
+        login.setActive(false);
+
+        Role role = roleService.getRoleByUuid(RoleDTO.USER);
+
+        login.addRole(role);
+        try
+        {
+            login = getLoginService().registerNewLogin(login);
+        } catch (Exception ex)
+        {
+            //@TODO log exception
+        }
+
+        Freelancer freelancer = new Freelancer(login);
+
+        //@TODO add freelancer specific info
+        getFreelancerService().addFreelancer(freelancer);
+
+        return true;
+    }
+
+    @Override
+    public boolean unregister(LoginDTO loginDTO)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean unregister(LoginDAO loginDAO)
+    public boolean activate(LoginDTO loginDTO)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean activate(LoginDAO loginDAO)
+    public boolean deactivate(LoginDTO loginDTO)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean deactivate(LoginDAO loginDAO)
+    public boolean makePremium(FreelancerDTO freelancerDTO)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean makePremium(FreelancerDAO freelancerDAO)
+    public boolean makeUnPremium(FreelancerDTO freelancerDTO)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public boolean makeUnPremium(FreelancerDAO freelancerDAO)
+    public FreelancerService getFreelancerService()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return freelancerService;
     }
-    
+
+    public void setFreelancerService(FreelancerService freelancerService)
+    {
+        this.freelancerService = freelancerService;
+    }
+
+    public LoginService getLoginService()
+    {
+        return loginService;
+    }
+
+    public void setLoginService(LoginService loginService)
+    {
+        this.loginService = loginService;
+    }
+
+    public RoleService getRoleService()
+    {
+        return roleService;
+    }
+
+    public void setRoleService(RoleService roleService)
+    {
+        this.roleService = roleService;
+    }
+
 }

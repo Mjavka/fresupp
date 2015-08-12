@@ -1,36 +1,38 @@
 package com.mjavka.fresupp.service;
 
-import com.mjavka.fresupp.dao.LoginDAO;
+import com.mjavka.fresupp.dto.LoginDTO;
 
 /**
  *
  * @author mjavka
  */
-public class CustomerStatesServiceImpl extends AbstractStatesService implements CustomerStatesService
+public class CustomerStatesServiceImpl  implements AccountStatesService, CustomerStatesService
 {
 
     @Override
-    public boolean register(LoginDAO loginDAO)
+    public boolean register(LoginDTO loginDTO)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean unregister(LoginDAO loginDAO)
+    public boolean unregister(LoginDTO loginDTO)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean activate(LoginDAO loginDAO)
+    public boolean activate(LoginDTO loginDTO)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean deactivate(LoginDAO loginDAO)
+    public boolean deactivate(LoginDTO loginDTO)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
 }
