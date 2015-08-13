@@ -5,15 +5,22 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:head>
-        <h:outputStylesheet library="css" name="main.css" />
+        
+      
         <h:outputScript library="javascript" name="jquery-1.11.3.js" />
-        <h:outputStylesheet library="css" name="bootstrap/css/bootstrap.css" />
         <h:outputScript library="css" name="bootstrap/js/bootstrap.js" />
+        <h:outputScript library="javascript" name="base.js" />
+        <h:outputScript library="javascript" name="project.js" />
+        
+      
+        <h:outputStylesheet library="css" name="bootstrap/css/bootstrap.css" />
+        <h:outputStylesheet  library="css"  name="main.css" />
+
         <title>fresupp</title>
         <ui:insert name="head"></ui:insert>
     </h:head>  
     <h:body>
-
+        
         <div id="main" class="content">
             <ui:insert name="body"></ui:insert>
         </div>

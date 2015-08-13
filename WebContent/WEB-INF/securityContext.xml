@@ -30,6 +30,8 @@
         
         <sec:intercept-url pattern="/css/**" access="permitAll"/>
         <sec:intercept-url pattern="/javascript/**" access="permitAll"/>
+        <sec:intercept-url pattern="/fonts/**" access="permitAll"/>
+        <sec:intercept-url pattern="/img/**" access="permitAll"/>
   
         
         
