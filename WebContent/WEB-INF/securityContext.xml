@@ -27,12 +27,12 @@
         
         <!-- Page level Spring Security : Enable Primefaces -->
         <sec:intercept-url pattern="/javax.faces.resource/**" access="permitAll"/>
-        
+<!--        
         <sec:intercept-url pattern="/css/**" access="permitAll"/>
         <sec:intercept-url pattern="/javascript/**" access="permitAll"/>
         <sec:intercept-url pattern="/fonts/**" access="permitAll"/>
         <sec:intercept-url pattern="/img/**" access="permitAll"/>
-  
+  -->
         
         
 
