@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+        
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+        
+        <ui:define name="head">
+            <header class="header header-transparent header-waterfall">
+		<ul class="nav nav-list pull-left mainMenu">
+			<li>
+                            <a data-toggle="menu" href="#menu" style="margin-top: 5px;" >
+					<span class="icon icon-lg">menu</span>
+				</a>
+			</li>
+		</ul>
+		<a class="header-logo margin-left-no" href="index.html">Freesupp</a>
+		<ul class="nav nav-list pull-right mainMenu">
+			<li>
+				<a data-toggle="menu" href="#profile">
+					<span class="access-hide">John Smith</span>
+					<span class="avatar"><h:graphicImage alt="Login" library="img" name="avatar-001.jpg" /></span>
+				</a>
+			</li>
+		</ul>
+	</header>
+        </ui:define>
+        
+        <ui:define name="body">
+            
+            <div class="avoid-fout-indicator avoid-fout-indicator-fixed">
+                <div class="progress-circular progress-circular-alt progress-circular-center">
+                    <div class="progress-circular-wrapper">
+                        <div class="progress-circular-inner">
+                            <div class="progress-circular-left">
+                                <div class="progress-circular-spinner"></div>
+                            </div>
+                            <div class="progress-circular-gap"></div>
+                            <div class="progress-circular-right">
+                                <div class="progress-circular-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+	
+            <nav aria-hidden="true" class="menu" id="menu" tabindex="-1">
+                <div class="menu-scroll">
+                    <div class="menu-content">
+                        <a class="menu-logo" href="index.html">Freesupp</a>
+                        <ul class="nav">
+                            <li>
+                                <a class="waves-attach" >Test1</a>
+                            </li>
+                        </ul>
+                        <hr>
+                            <ul class="nav">
+                                <li>
+                                    <a class="waves-attach" >SimpleButton</a>
+                                </li>
+                                <li>
+                                    <a class="waves-attach">Cascad Menu</a>
+                                    <span class="menu-collapse-toggle collapsed" data-target="#form-elements" data-toggle="collapse"><i class="icon menu-collapse-toggle-close">close</i><i class="icon menu-collapse-toggle-default">add</i></span>
+                                    <ul class="menu-collapse collapse" id="form-elements">
+                                        <li>
+                                            <a class="waves-attach">Cascad Test <small>(materialised)</small></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </hr>
+                    </div>
+                </div>
+            </nav>
+            
+            <nav aria-hidden="true" class="menu menu-right" id="profile" tabindex="-1">
+                <div class="menu-scroll">
+                    <div class="menu-top">
+                        <div class="menu-top-img">
+                            
+                        </div>
+                        <div class="menu-top-info">
+                            <a class="menu-top-user" href="javascript:void(0)"><span class="avatar pull-left"><h:graphicImage alt="Login" library="img" name="avatar-001.jpg" /></span>John Smith</a>
+                        </div>
+                        <div class="menu-top-info-sub">
+                            <small>Some additional information about John Smith</small>
+                        </div>
+                    </div>
+                    <div class="menu-content">
+                        <ul class="nav">
+                            <li>
+                                <a class="waves-attach" href="javascript:void(0)"><span class="icon icon-lg">account_box</span>Profile Settings</a>
+                            </li>
+                            <li>
+                                <a class="waves-attach" href="javascript:void(0)"><span class="icon icon-lg">add_to_photos</span>Upload Photo</a>
+                            </li>
+                            <li>
+                                <a class="waves-attach" ><span class="icon icon-lg">exit_to_app</span>Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+            
+            <div class="content" style="padding-bottom: 69px;" >
+                <div class="content-heading mainIndexF" >
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <h1 class="heading">Fresupp</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <section class="content-inner">
+
+                                <h2 class="content-sub-heading">Content</h2>
+                               
+                                <div class="tile-wrap">
+                                    <div class="tile waves-attach" >
+                                        <div class="tile-inner">
+                                            <span>Item</span>
+                                        </div>
+                                    </div>
+                                    <div class="tile waves-attach" >
+                                        <div class="tile-inner">
+                                            <span>Item</span>
+                                        </div>
+                                    </div>
+                                    <div class="tile waves-attach">
+                                        <div class="tile-inner">
+                                            <span>Item</span>
+                                        </div>
+                                    </div>
+                                    <div class="tile waves-attach">
+                                        <div class="tile-inner">
+                                            <span>Item</span>
+                                        </div>
+                                    </div>
+                                    <div class="tile waves-attach" >
+                                        <div class="tile-inner">
+                                            <span>Item</span>
+                                        </div>
+                                    </div>
+                                    <div class="tile waves-attach" >
+                                        <div class="tile-inner">
+                                            <span>Item</span>
+                                        </div>
+                                    </div>
+                                    <div class="tile waves-attach" >
+                                        <div class="tile-inner">
+                                            <span>Item</span>
+                                        </div>
+                                    </div>
+                                    <div class="tile waves-attach" >
+                                        <div class="tile-inner">
+                                            <span>Item</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </ui:define>
+        
+        
+    </ui:composition>      
+        
+        
+</html>

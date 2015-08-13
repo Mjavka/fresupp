@@ -1542,8 +1542,8 @@ th {
   font-family: "FontAwesome";
   font-style: normal;
   font-weight: normal;
-  src: url("./fonts/fontawesome-webfont.eot?v=4.3.0");
-  src: url("./fonts/fontawesome-webfont.eot?#iefix&v=4.3.0") format("embedded-opentype"), url("./fonts/fontawesome-webfont.woff2?v=4.3.0") format("woff2"), url("./fonts/fontawesome-webfont.woff?v=4.3.0") format("woff"), url("./fonts/fontawesome-webfont.ttf?v=4.3.0") format("truetype"), url("./fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular") format("svg");
+  src: url("/fresupp/javax.faces.resource/fontawesome-webfont.eot.xhtml?ln=fonts");
+  src: url("/fresupp/javax.faces.resource/fontawesome-webfont.eot.xhtml?ln=fonts") format("embedded-opentype"), url("/fresupp/javax.faces.resource/fontawesome-webfont.woff2.xhtml?ln=fonts") format("woff2"), url("/fresupp/javax.faces.resource/fontawesome-webfont.woff.xhtml?ln=fonts") format("woff"), url("/fresupp/javax.faces.resource/fontawesome-webfont.ttf.xhtml?ln=fonts") format("truetype"), url("/fresupp/javax.faces.resource/fontawesome-webfont.svg.xhtml?ln=fonts") format("svg");
 }
 .fa {
   display: inline-block;
@@ -3875,9 +3875,16 @@ th {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url("./fonts/MaterialIcons-Regular.eot?v=2.0.0");
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url("./fonts/MaterialIcons-Regular.woff2?v=2.0.0") format("woff2"), url("./fonts/MaterialIcons-Regular.woff?v=2.0.0") format("woff"), url("./fonts/MaterialIcons-Regular.ttf?v=2.0.0") format("truetype");
+  src: url("/fresupp/javax.faces.resource/MaterialIcons-Regular.eot.xhtml?ln=fonts");
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url("/fresupp/javax.faces.resource/MaterialIcons-Regular.woff.xhtml?ln=fonts") format("woff2"), url("/fresupp/javax.faces.resource/MaterialIcons-Regular.woff.xhtml?ln=fonts") format("woff"), url("/fresupp/javax.faces.resource/MaterialIcons-Regular.ttf.xhtml?ln=fonts") format("truetype");
 }
+.mainMenu > li > a:hover, .mainMenu > li > a:focus {
+    
+    background: transparent;
+    
+}
+
+
 .icon, .breadcrumb > li + li:before {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -8575,6 +8582,14 @@ input[type="checkbox"]:checked + .switch-toggle-yellow:active:after, input[type=
 }
 .content-heading .heading {
   font-weight: 300;
+}
+
+.mainIndexF {
+   background-image: url(/fresupp/javax.faces.resource/alt.jpg.xhtml?ln=img);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 68px; 
 }
 
 .page-alt .content-heading {
