@@ -2,9 +2,6 @@ package com.mjavka.fresupp.actions;
 
 import com.mjavka.fresupp.dto.LoginDTO;
 import com.mjavka.fresupp.service.AccountStatesService;
-import com.mjavka.fresupp.service.FreelancerStatesService;
-import com.mjavka.fresupp.service.LoginService;
-import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -18,8 +15,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 @ManagedBean(name = "freelancerRegistrationAction")
 @ViewScoped
-public class FreelancerRegistrationAction extends AbstractRegistrationAction implements Serializable
+public class FreelancerRegistrationAction extends AbstractRegistrationAction
 {
+    
     private static final Logger logger = LoggerFactory.getLogger(FreelancerRegistrationAction.class);
     
     @ManagedProperty(value = "#{freelancerStatesService}")

@@ -9,6 +9,7 @@ import com.mjavka.fresupp.annotations.PasswordMatches;
 @PasswordMatches
 public abstract class AbstractRegistrationAction
 {
+    
     private String email;
     private String userName;
     private String password;

@@ -44,17 +44,11 @@ public class FreelancerStatesServiceImpl implements AccountStatesService, Freela
         Role role = roleService.getRoleByUuid(RoleDTO.USER);
 
         login.addRole(role);
-        try
-        {
-            login = getLoginService().registerNewLogin(login);
-        } catch (Exception ex)
-        {
-            //@TODO log exception
-        }
+        
+        login = getLoginService().registerNewLogin(login);
 
         Freelancer freelancer = new Freelancer(login);
-
-        //@TODO add freelancer specific info
+        
         getFreelancerService().addFreelancer(freelancer);
 
         return true;

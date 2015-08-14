@@ -32,14 +32,14 @@
                                             </div>
                                         </div>
                                         <div class="card-inner">
-                                            <form class="form" action="index.html">
+                                            <div class="form">
                                                 <div class="form-group form-group-label">
                                                     <div class="row">
                                                         <div class="col-md-10 col-md-push-1">
                                                             <label class="floating-label" for="login-username">Username</label>
                                                              <h:inputText id="userName"  class="form-control"
                                                                           required="true" 
-                                                             value="Username" 
+                                                                          value="#{freelancerRegistrationAction.userName}" 
                                                              requiredMessage="Please enter username">
                                                               </h:inputText>
                                                         </div>
@@ -52,7 +52,7 @@
                                                            
                                                             <h:inputSecret id="password"  class="form-control"
                                                                            required="true" 
-                                                               value="Password" 
+                                                                           value="#{freelancerRegistrationAction.password}" 
                                                                requiredMessage="Please enter password">
                                                             </h:inputSecret>
                                                         </div>
@@ -65,7 +65,7 @@
                                                            
                                                             <h:inputSecret id="confirmPassword"  class="form-control"
                                                                            required="true" 
-                                                               value="Confirm Password" 
+                                                                           value="#{freelancerRegistrationAction.matchingPassword}" 
                                                                requiredMessage="Please confirm password">
                                                             </h:inputSecret>
                                                         </div>
@@ -77,7 +77,7 @@
                                                             <label class="floating-label" for="login-email">email</label>
                                                              <h:inputText id="userEmail"  class="form-control"
                                                                           required="true" 
-                                                             value="Useremail" 
+                                                                          value="#{freelancerRegistrationAction.email}" 
                                                              requiredMessage="Please enter email">
                                                               </h:inputText>
                                                         </div>
@@ -99,13 +99,13 @@
                                                         <div class="col-md-10 col-md-push-1">
                                                             <p:commandButton id="btnLoginId" 
                                                              value="Create account" 
-                                                             action="# {}" 
+                                                             action="#{freelancerRegistrationAction.register()}" 
                                                              styleClass="btn btn-block waves-attach waves-button">
                                                              </p:commandButton>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

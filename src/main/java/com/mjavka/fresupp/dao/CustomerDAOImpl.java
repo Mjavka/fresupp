@@ -34,7 +34,8 @@ public class CustomerDAOImpl implements CustomerDAO
     @Override
     public void addCustomer(Customer p)
     {
-        getCurrentSession().save(p);
+        getCurrentSession().persist(p);
+        
         logger.info("Customer saved successfully, Customer Details=" + p);
     }
     
@@ -42,6 +43,7 @@ public class CustomerDAOImpl implements CustomerDAO
     public void updateCustomer(Customer p)
     {
         getCurrentSession().update(p);
+        
         logger.info("Customer updated successfully, Customer Details=" + p);
     }
     

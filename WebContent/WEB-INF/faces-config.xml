@@ -15,15 +15,31 @@
         <from-view-id>/pages/unsecure/login.xhtml</from-view-id>
         <!-- navigation-case for method login() -->
         <navigation-case>
-            <from-action>#{loginAction.login}</from-action>
+            <from-action>#{loginAction.login()}</from-action>
             <from-outcome>correct</from-outcome>
-            <to-view-id>/pages/secure/list.xhtml?faces-redirect=true</to-view-id>
+            <to-view-id>/pages/unsecure/indexF.xhtml</to-view-id>
         </navigation-case>
         <!-- navigation-case for method login() -->
         <navigation-case>
-            <from-action>#{loginAction.login}</from-action>
+            <from-action>#{loginAction.login()}</from-action>
             <from-outcome>incorrect</from-outcome>
             <to-view-id>/pages/unsecure/loginError.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/pages/unsecure/freelanceRegister.xhtml</from-view-id>
+        <!-- navigation-case for method login() -->
+        <navigation-case>
+            <from-action>#{freelancerRegistrationAction.register()}</from-action>
+            <from-outcome>correct</from-outcome>
+            <to-view-id>/pages/unsecure/indexF.xhtml</to-view-id>
+        </navigation-case>
+        <!-- navigation-case for method login() -->
+        <navigation-case>
+            <from-action>#{freelancerRegistrationAction.register()}</from-action>
+            <from-outcome>incorrect</from-outcome>
+            <to-view-id>/pages/unsecure/error.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
   
