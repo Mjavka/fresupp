@@ -1,5 +1,6 @@
-package com.mjavka.fresupp.model;
+package com.mjavka.fresupp.dto;
 
+import com.mjavka.fresupp.model.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,23 +14,23 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import java.util.UUID;
 import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
- * Entity bean with JPA annotations
- * Hibernate provides JPA implementation
+ * Entity bean with JPA annotations Hibernate provides JPA implementation
+ *
  * @author mjavka
  *
  */
 @Entity
-@Table(name = "TASK_TB")
-public class Task implements Serializable
+@Table(name = "TECHNICAL_TASK_TB")
+public class TechnicalTaskDTO implements Serializable
 {
-    public Task()
+
+    public TechnicalTaskDTO()
     {
-        
+
     }
 
     @Id
@@ -41,32 +42,20 @@ public class Task implements Serializable
 
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "description")
     private String description;
-    
+
     @Column(name = "creation_date")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date creationDate;
-    
-    @Column(name = "deadline_date")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date deadlineDate;
-    
-    
-    @ManyToOne(targetEntity = Login.class, fetch = FetchType.LAZY)
-    @JoinTable(name="ORDER_TASK_REF",
-        joinColumns = {
-            
-            @JoinColumn(name="task_uuid", referencedColumnName = "object_uuid")},
-        
-        inverseJoinColumns = {
-            
-            @JoinColumn(name="order_uuid", referencedColumnName = "object_uuid")
-        }
-    )
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_ref")
     private Order order;
-        
+
+    //@TODO File attachement
+    
     public UUID getUuid()
     {
         return uuid;
@@ -107,16 +96,6 @@ public class Task implements Serializable
         this.creationDate = creationDate;
     }
 
-    public Date getDeadlineDate()
-    {
-        return deadlineDate;
-    }
-
-    public void setDeadlineDate(Date deadlineDate)
-    {
-        this.deadlineDate = deadlineDate;
-    }
-
     public Order getOrder()
     {
         return order;
@@ -126,7 +105,5 @@ public class Task implements Serializable
     {
         this.order = order;
     }
-
-
 
 }

@@ -42,7 +42,39 @@
             <to-view-id>/pages/unsecure/error.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-  
+    
+    <navigation-rule>
+        <from-view-id>/pages/unsecure/customerRegister.xhtml</from-view-id>
+        <!-- navigation-case for method login() -->
+        <navigation-case>
+            <from-action>#{customerRegistrationAction.register()}</from-action>
+            <from-outcome>correct</from-outcome>
+            <to-view-id>/pages/unsecure/indexC.xhtml</to-view-id>
+        </navigation-case>
+        <!-- navigation-case for method login() -->
+        <navigation-case>
+            <from-action>#{customerRegistrationAction.register()}</from-action>
+            <from-outcome>incorrect</from-outcome>
+            <to-view-id>/pages/unsecure/error.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/pages/unsecure/orderRegister.xhtml</from-view-id>
+        <!-- navigation-case for method login() -->
+        <navigation-case>
+            <from-action>#{orderRegistrationAction.register()}</from-action>
+            <from-outcome>correct</from-outcome>
+            <to-view-id>/pages/unsecure/orderRegistrationSuccess.xhtml</to-view-id>
+        </navigation-case>
+        <!-- navigation-case for method login() -->
+        <navigation-case>
+            <from-action>#{orderRegistrationAction.register()}</from-action>
+            <from-outcome>incorrect</from-outcome>
+            <to-view-id>/pages/unsecure/error.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
     <!-- navigation-rule for list.xhtml -->
     <navigation-rule>
         <from-view-id>/pages/secure/list.xhtml</from-view-id>

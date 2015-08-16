@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mjavka.fresupp.model.Customer;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 @Service("customerService")
@@ -20,7 +19,6 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerDAO customerDAO;
  
     @Override
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional(readOnly = false)
     public void addCustomer(Customer p) {
         getCustomerDAO().addCustomer(p);

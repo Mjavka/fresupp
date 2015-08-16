@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import java.util.UUID;
+import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
@@ -24,36 +25,10 @@ import javax.persistence.ManyToOne;
 @Table(name = "ROLE_TB")
 public class Role implements Serializable
 {
-
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
-    @Column(name = "object_uuid", unique = true)
-    @Type(type = "pg-uuid")
-    private UUID uuid;
-
-    
-    @Column(name = "name", nullable = false, length = 15)
-    private String role;
-
     public Role()
     {
         
     }
-    
-    
-    @ManyToOne(targetEntity = Login.class)
-    @JoinTable(name="LOGIN_ROLE_REF",
-        joinColumns = {
-            
-            @JoinColumn(name="role_uuid", referencedColumnName = "object_uuid")},
-        
-        inverseJoinColumns = {
-            
-            @JoinColumn(name="login_uuid", referencedColumnName = "object_uuid")
-        }
-    )
-    private Login login;
     
     public Role(String role, UUID uuid)
     {
@@ -62,6 +37,19 @@ public class Role implements Serializable
         this.uuid = uuid;
     }
     
+    private UUID uuid;
+
+    private String role;
+
+    private Login login;
+    
+    
+    
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @Column(name = "object_uuid", unique = true)
+    @Type(type = "pg-uuid")
     public UUID getUuid()
     {
         return uuid;
@@ -72,6 +60,7 @@ public class Role implements Serializable
         this.uuid = uuid;
     }
 
+    @Column(name = "name", nullable = false, length = 15)
     public String getRole()
     {
         return role;
@@ -82,6 +71,17 @@ public class Role implements Serializable
         this.role = role;
     }
 
+    @ManyToOne(targetEntity = Login.class, fetch = FetchType.LAZY)
+    @JoinTable(name="LOGIN_ROLE_REF",
+        joinColumns = {
+            
+            @JoinColumn(name="role_uuid", referencedColumnName = "object_uuid")},
+        
+        inverseJoinColumns = {
+            
+            @JoinColumn(name="login_uuid", referencedColumnName = "object_uuid")
+        }
+    )
     public Login getLogin()
     {
         return login;

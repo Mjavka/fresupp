@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.mjavka.fresupp.dao.OrderDAO;
 import com.mjavka.fresupp.model.Order;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ public class OrderServiceImpl implements OrderService
     {
         
         //@TODO preprocess and final validation
+        p.setCreationDate(new Date());
         orderDAO.addOrder(p);
     }
     

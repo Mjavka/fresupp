@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+
+        <ui:define name="head">
+            <header class="header header-waterfall">
+                <span class="header-logo">fresupp</span>
+            </header>
+        </ui:define>
+
+        <ui:define name="body">
+
+            <h:form  id="regFreelancerFormmId" prependId="false">
+
+                <div class="container" style="margin-top: 56px;padding-bottom: 69px;" >
+
+                    <div class="row">
+                        <div class="col-lg-4 col-lg-push-4 col-sm-10 col-sm-push-1">
+                            <section class="content-inner">
+                                <div class="card-wrap">
+                                    <div class="card">
+                                        <div class="card-main">
+                                            <div class="card-header">
+                                                <div class="card-inner">
+                                                    <h1 class="card-heading">Order registration</h1>
+                                                </div>
+                                            </div>
+                                            <div class="card-inner">
+                                                <div class="form">
+                                                    <div class="form-group form-group-label">
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-push-1">
+                                                                <label class="floating-label" for="order-name">Name</label>
+                                                                <h:inputText id="orderName"  class="form-control"
+                                                                             required="true" 
+                                                                             value="#{orderRegistrationAction.orderDTO.name}" 
+                                                                             requiredMessage="Please enter order name">
+                                                                </h:inputText>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group form-group-label">
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-push-1">
+                                                                <label class="floating-label" for="order-description">Description</label>
+                                                                <h:inputTextarea id="orderDescription"  class="form-control"
+                                                                                 required="true" 
+                                                                                 value="#{orderRegistrationAction.orderDTO.description}" 
+                                                                                 requiredMessage="Please enter order name">
+                                                                </h:inputTextarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group form-group-label">
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-push-1">
+                                                                <label class="floating-label" for="order-description">Customer uuid</label>
+                                                                <h:inputText id="orderCustomerUuid"  class="form-control"
+                                                                                 required="true" 
+                                                                                 value="#{orderRegistrationAction.orderDTO.customerUUID}" 
+                                                                                 requiredMessage="Please enter order name">
+                                                                </h:inputText>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group form-group-label">
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-push-1">
+                                                                <label class="floating-label" for="order-description">Order status</label>
+                                                                <h:inputText id="userName"  class="form-control"
+                                                                                 required="true" 
+                                                                                 value="#{orderRegistrationAction.orderDTO.status}" 
+                                                                                 requiredMessage="Please enter order name">
+                                                                </h:inputText>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-push-1">
+                                                                <p:commandButton id="btnLoginId" 
+                                                                                 value="Create account" 
+                                                                                 action="#{orderRegistrationAction.register()}" 
+                                                                                 styleClass="btn btn-block waves-attach waves-button">
+                                                                </p:commandButton>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <p class="margin-no-top pull-left"><a class="btn btn-flat btn-blue waves-attach" href="javascript:void(0)">Need help?</a></p>
+
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                </div>
+
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+
+
+
+
+    <!--                <div id="regFreelancerFieldsPnlId">
+                        <div id="regFreelancerContId">
+    
+                            <h:outputText id="outTxtUserNameId" 
+                                          value="Username: " >
+                            </h:outputText>
+    
+                            <h:inputText id="userName" 
+                                         required="true" 
+                                         parent=""
+                                         value="#{orderRegistrationAction.userName}" 
+                                         requiredMessage="Please enter username">
+                            </h:inputText>
+    
+                            <h:outputLabel id="outLblUserEmailId" 
+                                           for="email" >
+                            </h:outputLabel>
+    
+                            <h:outputText id="outTxtUserEmailId" 
+                                          value="email: " >
+                            </h:outputText>
+    
+                            <p:inputText id="email" required="true" label="email" size="40"
+                                         requiredMessage="Please enter your email address."
+                                         validatorMessage="Invalid email format"
+                                         value="#{orderRegistrationAction.email}">
+    
+                                <f:validateRegex
+                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+    
+                            </p:inputText>
+                            
+                            <h:outputLabel id="outLblUserNameId" 
+                                           for="userName" >
+                            </h:outputLabel>
+                        </div>
+    
+                        <div id="regFreelancerPassContId">
+                            <h:outputText id="outTxtPasswordId" 
+                                          value="Password: " >
+                            </h:outputText>
+    
+                            <h:inputSecret id="password"  
+                                           required="true" 
+                                           value="#{orderRegistrationAction.password}" 
+                                           requiredMessage="Please enter password">
+                            </h:inputSecret>
+    
+                            <h:outputLabel id="outLblPasswordId" 
+                                           for="password" >
+                            </h:outputLabel>
+    
+                            <h:outputText id="outTxtPasswordConfirmId" 
+                                          value="Password: " >
+                            </h:outputText>
+    
+                            <h:inputSecret id="passwordConfirm"  
+                                           required="true" 
+                                           value="#{orderRegistrationAction.matchingPassword}" 
+                                           requiredMessage="Please repeat password">
+                            </h:inputSecret>
+    
+                            <h:outputLabel id="outLblPasswordConfirmId" 
+                                           for="password" >
+                            </h:outputLabel>
+                        </div>
+    
+                    </div>
+    
+                    <div id="registerBtnPanelId">
+                        <p:commandButton id="btnRegisterId" 
+                                         value="Login" 
+                                         action="#{orderRegistrationAction.register}" 
+                                         styleClass="registerPanelBtn">
+                        </p:commandButton>
+    
+                        <p:commandButton id="btnCancelId" 
+                                         value="Cancel" 
+                                         action="#{orderRegistrationAction.cancel}" 
+                                         styleClass="loginPanelBtn" 
+                                         immediate="true" 
+                                         update="regFreelancerFormmId">
+                        </p:commandButton>
+    
+                    </div>-->
+
+
+    <div>
+        <h:messages></h:messages>
+    </div>
+
+</html>

@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import java.util.UUID;
+import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
@@ -42,7 +43,7 @@ public class Skill implements Serializable
     }
     
     
-    @ManyToOne(targetEntity = Login.class)
+    @ManyToOne(targetEntity = Login.class, fetch = FetchType.LAZY)
     @JoinTable(name="LOGIN_ROLE_REF",
         joinColumns = {
             

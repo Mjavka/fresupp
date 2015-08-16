@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -67,7 +68,7 @@ public class Order implements Serializable
     private TechnicalTask tt;
 
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "ORDER_TASK_REF",
             joinColumns =
             {
@@ -132,6 +133,19 @@ public class Order implements Serializable
             }
     )
     private List<Manager> managerList = new ArrayList<Manager>();
+    
+    @ManyToOne(targetEntity = Customer.class, fetch = FetchType.LAZY)
+    @JoinTable(name="CUSTOMER_ORDER_REF",
+        joinColumns = {
+            
+            @JoinColumn(name="order_uuid", referencedColumnName = "object_uuid")},
+        
+        inverseJoinColumns = {
+            
+            @JoinColumn(name="customer_uuid", referencedColumnName = "object_uuid")
+        }
+    )
+    private Customer customer;
     
     
     public java.util.UUID getUuid()
@@ -248,6 +262,16 @@ public class Order implements Serializable
     public void setManagerList(List<Manager> managerList)
     {
         this.managerList = managerList;
+    }
+
+    public Customer getCustomer()
+    {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer)
+    {
+        this.customer = customer;
     }
     
 }

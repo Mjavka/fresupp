@@ -1,6 +1,7 @@
 package com.mjavka.fresupp.dao;
 
 import com.mjavka.fresupp.model.Customer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,9 +57,27 @@ public class CustomerDAOImpl implements CustomerDAO
     @Override 
     public Customer getCustomerByUuid(UUID uuid)
     {
-        List list = getCurrentSession().createQuery("from Customer where object_uuid=?").setParameter(0, uuid).list();
-        
-        return (Customer)list.get(0);
+        List<Customer> customers = new ArrayList<Customer>();
+
+        customers = sessionFactory.getCurrentSession()
+                .createQuery("FROM Customer WHERE object_uuid=?")
+                .setParameter(0, uuid)
+                .list();
+
+        if (customers.size() > 0)
+        {
+            return customers.get(0);
+        } else if (customers.size() > 1)
+        {
+            logger.error("found " + customers.size() + " customers with uuid = "
+                    + uuid);
+            
+            return null;
+        } else
+
+        {
+            return null;
+        }
         
     }
 

@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author mjavka
  */
 @Service("freelancerStatesService")
-public class FreelancerStatesServiceImpl implements AccountStatesService, FreelancerStatesService
+public class FreelancerStatesServiceImpl implements AccountStatesService, CustomerStatesService
 {
 
     @Autowired
@@ -68,18 +68,6 @@ public class FreelancerStatesServiceImpl implements AccountStatesService, Freela
 
     @Override
     public boolean deactivate(LoginDTO loginDTO)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean makePremium(FreelancerDTO freelancerDTO)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean makeUnPremium(FreelancerDTO freelancerDTO)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

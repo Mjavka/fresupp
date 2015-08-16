@@ -1,10 +1,15 @@
 package com.mjavka.fresupp.model;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -19,18 +24,28 @@ import org.hibernate.annotations.Type;
 @Table(name="CUSTOMER_TB")
 public class Customer implements Serializable 
 {
+    public Customer(Login login)
+    {
+        this.login = login;
+    }
+    
+    public Customer()
+    {
+        
+    }
+    
+    
+    private java.util.UUID uuid;
+    
+    private Login login;
+    
+    private Set<Order> orders;
+
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     @Column(name = "object_uuid", unique = true)
     @Type(type="pg-uuid")
-    private java.util.UUID uuid;
-    
-    @Column(name = "login_ref")
-    private java.util.UUID loginUuid;
-    
-    
-
     public java.util.UUID getUuid()
     {
         return uuid;
@@ -40,20 +55,33 @@ public class Customer implements Serializable
     {
         this.uuid = uuid;
     }
-
-    public java.util.UUID getLoginUuid()
-    {
-        return loginUuid;
-    }
-
-    public void setLoginUuid(java.util.UUID loginUuid)
-    {
-        this.loginUuid = loginUuid;
-    }
      
     @Override
     public String toString(){
-        return "uuid="+uuid+", loginUuid="+loginUuid;
+        return "uuid="+uuid;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    public Set<Order> getOrders()
+    {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders)
+    {
+        this.orders = orders;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "login_ref")
+    public Login getLogin()
+    {
+        return login;
+    }
+
+    public void setLogin(Login login)
+    {
+        this.login = login;
     }
 
     

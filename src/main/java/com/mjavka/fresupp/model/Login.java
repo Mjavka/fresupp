@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import org.hibernate.annotations.GenericGenerator;
@@ -35,49 +34,23 @@ public class Login implements Serializable
 
     }
 
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
-    @Column(name = "object_uuid", unique = true)
-    @Type(type = "pg-uuid")
     private java.util.UUID uuid;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
     private String password;
 
-    @Column(name = "username")
     private String username;
 
-    @Column(name = "reg_date")
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date regDate;
 
-    @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "last_login")
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastLogin;
 
-    @Column(name = "status")
     private String status;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "LOGIN_ROLE_REF",
-            joinColumns =
-            {
-
-                @JoinColumn(name = "login_uuid", referencedColumnName = "object_uuid")
-            },
-            inverseJoinColumns =
-            {
-
-                @JoinColumn(name = "role_uuid", referencedColumnName = "object_uuid")
-            }
-    )
+    
     private List<Role> roles = new ArrayList<Role>(0);
 
     public void addRole(Role b)
@@ -103,6 +76,11 @@ public class Login implements Serializable
 //    @OneToOne(fetch = FetchType.LAZY, mappedBy = "login", cascade = CascadeType.ALL)
 //    private Freelancer freelancer;
     
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @Column(name = "object_uuid", unique = true)
+    @Type(type = "pg-uuid")
     public java.util.UUID getUuid()
     {
         return uuid;
@@ -113,6 +91,7 @@ public class Login implements Serializable
         this.uuid = uuid;
     }
 
+    @Column(name = "email")
     public String getEmail()
     {
         return email;
@@ -123,6 +102,8 @@ public class Login implements Serializable
         this.email = email;
     }
 
+    
+    @Column(name = "password")
     public String getPassword()
     {
         return password;
@@ -133,6 +114,8 @@ public class Login implements Serializable
         this.password = password;
     }
 
+    
+    @Column(name = "username")
     public String getUsername()
     {
         return username;
@@ -143,6 +126,9 @@ public class Login implements Serializable
         this.username = username;
     }
 
+    
+    @Column(name = "reg_date")
+    @Temporal(javax.persistence.TemporalType.DATE)
     public Date getRegDate()
     {
         return regDate;
@@ -153,6 +139,8 @@ public class Login implements Serializable
         this.regDate = regDate;
     }
 
+    
+    @Column(name = "active")
     public Boolean getActive()
     {
         return active;
@@ -163,6 +151,9 @@ public class Login implements Serializable
         this.active = active;
     }
 
+    
+    @Column(name = "last_login")
+    @Temporal(javax.persistence.TemporalType.DATE)
     public Date getLastLogin()
     {
         return lastLogin;
@@ -173,6 +164,7 @@ public class Login implements Serializable
         this.lastLogin = lastLogin;
     }
 
+    @Column(name = "status")
     public String getStatus()
     {
         return status;
@@ -189,6 +181,19 @@ public class Login implements Serializable
         return "uuid=" + uuid + ", username=" + username;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "LOGIN_ROLE_REF",
+            joinColumns =
+            {
+
+                @JoinColumn(name = "login_uuid", referencedColumnName = "object_uuid")
+            },
+            inverseJoinColumns =
+            {
+
+                @JoinColumn(name = "role_uuid", referencedColumnName = "object_uuid")
+            }
+    )
     public List<Role> getRoles()
     {
         return roles;
