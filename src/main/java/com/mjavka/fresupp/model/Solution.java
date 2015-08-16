@@ -2,7 +2,6 @@ package com.mjavka.fresupp.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,10 +12,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import java.util.UUID;
-import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -26,10 +24,10 @@ import javax.persistence.Temporal;
  *
  */
 @Entity
-@Table(name = "TASK_TB")
-public class Task implements Serializable
+@Table(name = "SOLUTION_TB")
+public class Solution implements Serializable
 {
-    public Task()
+    public Solution()
     {
         
     }
@@ -48,9 +46,7 @@ public class Task implements Serializable
     
     private Date deadlineDate;
     
-    private Order order;
-    
-    private List<Solution> solutions;
+    private Task task;
     
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -113,16 +109,16 @@ public class Task implements Serializable
         this.deadlineDate = deadlineDate;
     }
 
-    @ManyToOne(targetEntity = Order.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_ref")
-    public Order getOrder()
+    @ManyToOne(targetEntity = Task.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_ref")
+    public Task getTask()
     {
-        return order;
+        return task;
     }
 
-    public void setOrder(Order order)
+    public void setTask(Task task)
     {
-        this.order = order;
+        this.task = task;
     }
 
     @Column(name = "task_type")
@@ -145,17 +141,6 @@ public class Task implements Serializable
     public void setStatus(Integer status)
     {
         this.status = status;
-    }
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "task", cascade = CascadeType.ALL)
-    public List<Solution> getSolutions()
-    {
-        return solutions;
-    }
-
-    public void setSolutions(List<Solution> solutions)
-    {
-        this.solutions = solutions;
     }
 
 

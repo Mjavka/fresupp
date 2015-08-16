@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Entity bean with JPA annotations Hibernate provides JPA implementation
@@ -33,35 +34,15 @@ public class OrderDTO implements Serializable
 
     private Integer status;
     
-    private TechnicalTaskDTO tt;
+    private UUID ttUuid;
     
-    private String customerUUID;
+    private UUID customerUUID;
 
-    private List<TaskDTO> taskList = new ArrayList<TaskDTO>(0);
-
-    public void addTask(TaskDTO b)
-    {
-        if (b != null)
-        {
-            if (getTaskList().contains(b))
-            {
-                getTaskList().set(getTaskList().indexOf(b), b);
-            } else
-            {
-                getTaskList().add(b);
-            }
-        }
-    }
-
-    public void removeTask(TaskDTO b)
-    {
-        getTaskList().remove(b);
-        b.setOrder(null);
-    }
+    private List<UUID> taskUUIDList = new ArrayList<UUID>(0);
     
-    private List<FreelancerDTO> freelancersList = new ArrayList<FreelancerDTO>();
+    private List<UUID> freelancersUUIDList = new ArrayList<UUID>();
     
-    private List<ManagerDTO> managerList = new ArrayList<ManagerDTO>();
+    private List<UUID> managerUUIDList = new ArrayList<UUID>();
     
     
     public java.util.UUID getUuid()
@@ -140,52 +121,52 @@ public class OrderDTO implements Serializable
         this.status = status;
     }
 
-    public TechnicalTaskDTO getTt()
+    public UUID getTtUuid()
     {
-        return tt;
+        return ttUuid;
     }
 
-    public void setTt(TechnicalTaskDTO tt)
+    public void setTtUuid(UUID ttUuid)
     {
-        this.tt = tt;
+        this.ttUuid = ttUuid;
     }
 
-    public List<TaskDTO> getTaskList()
+    public List<UUID> getTaskUUIDList()
     {
-        return taskList;
+        return taskUUIDList;
     }
 
-    public void setTaskList(List<TaskDTO> taskList)
+    public void setTaskUUIDList(List<UUID> taskUUIDList)
     {
-        this.taskList = taskList;
+        this.taskUUIDList = taskUUIDList;
     }
 
-    public List<FreelancerDTO> getFreelancersList()
+    public List<UUID> getFreelancersUUIDList()
     {
-        return freelancersList;
+        return freelancersUUIDList;
     }
 
-    public void setFreelancersList(List<FreelancerDTO> freelancersList)
+    public void setFreelancersUUIDList(List<UUID> freelancersUUIDList)
     {
-        this.freelancersList = freelancersList;
+        this.freelancersUUIDList = freelancersUUIDList;
     }
 
-    public List<ManagerDTO> getManagerList()
+    public List<UUID> getManagerUUIDList()
     {
-        return managerList;
+        return managerUUIDList;
     }
 
-    public void setManagerList(List<ManagerDTO> managerList)
+    public void setManagerUUIDList(List<UUID> managerUUIDList)
     {
-        this.managerList = managerList;
+        this.managerUUIDList = managerUUIDList;
     }
 
-    public String getCustomerUUID()
+    public UUID getCustomerUUID()
     {
         return customerUUID;
     }
 
-    public void setCustomerUUID(String customerUUID)
+    public void setCustomerUUID(UUID customerUUID)
     {
         this.customerUUID = customerUUID;
     }

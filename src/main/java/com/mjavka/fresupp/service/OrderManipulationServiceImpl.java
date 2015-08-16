@@ -35,7 +35,7 @@ public class OrderManipulationServiceImpl implements OrderManipulationService
         
         order.setType(p.getType()); //@TODO set other order fields
         
-        Customer customer = getCustomerService().getCustomerByUuid(UUID.fromString(p.getCustomerUUID()));
+        Customer customer = getCustomerService().getCustomerByUuid(p.getCustomerUUID());
         
         order.setCustomer(customer);
         

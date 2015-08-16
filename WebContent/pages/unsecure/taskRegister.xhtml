@@ -28,7 +28,7 @@
                                         <div class="card-main">
                                             <div class="card-header">
                                                 <div class="card-inner">
-                                                    <h1 class="card-heading">Order registration</h1>
+                                                    <h1 class="card-heading">Task registration</h1>
                                                 </div>
                                             </div>
                                             <div class="card-inner">
@@ -39,7 +39,7 @@
                                                                 <label class="floating-label" for="order-name">Name</label>
                                                                 <h:inputText id="orderName"  class="form-control"
                                                                              required="true" 
-                                                                             value="#{orderRegistrationAction.orderDTO.name}" 
+                                                                             value="#{taskRegistrationAction.taskDTO.name}" 
                                                                              requiredMessage="Please enter order name">
                                                                 </h:inputText>
                                                             </div>
@@ -51,7 +51,7 @@
                                                                 <label class="floating-label" for="order-description">Description</label>
                                                                 <h:inputTextarea id="orderDescription"  class="form-control"
                                                                                  required="true" 
-                                                                                 value="#{orderRegistrationAction.orderDTO.description}" 
+                                                                                 value="#{taskRegistrationAction.taskDTO.description}" 
                                                                                  requiredMessage="Please enter order name">
                                                                 </h:inputTextarea>
                                                             </div>
@@ -63,7 +63,7 @@
                                                                 <label class="floating-label" for="order-description">Customer uuid</label>
                                                                 <h:inputText id="orderCustomerUuid"  class="form-control"
                                                                                  required="true" 
-                                                                                 value="#{orderRegistrationAction.customerUuidString}" 
+                                                                                 value="#{taskRegistrationAction.orderUuidString}" 
                                                                                  requiredMessage="Please enter order name">
                                                                 </h:inputText>
                                                             </div>
@@ -75,7 +75,7 @@
                                                                 <label class="floating-label" for="order-description">Order status</label>
                                                                 <h:inputText id="userName"  class="form-control"
                                                                                  required="true" 
-                                                                                 value="#{orderRegistrationAction.orderDTO.status}" 
+                                                                                 value="#{taskRegistrationAction.taskDTO.status}" 
                                                                                  requiredMessage="Please enter order name">
                                                                 </h:inputText>
                                                             </div>
@@ -86,7 +86,7 @@
                                                             <div class="col-md-10 col-md-push-1">
                                                                 <p:commandButton id="btnLoginId" 
                                                                                  value="Create account" 
-                                                                                 action="#{orderRegistrationAction.register()}" 
+                                                                                 action="#{taskRegistrationAction.register()}" 
                                                                                  styleClass="btn btn-block waves-attach waves-button">
                                                                 </p:commandButton>
                                                             </div>
@@ -126,7 +126,7 @@
                             <h:inputText id="userName" 
                                          required="true" 
                                          parent=""
-                                         value="#{orderRegistrationAction.userName}" 
+                                         value="#{taskRegistrationAction.userName}" 
                                          requiredMessage="Please enter username">
                             </h:inputText>
     
@@ -141,7 +141,7 @@
                             <p:inputText id="email" required="true" label="email" size="40"
                                          requiredMessage="Please enter your email address."
                                          validatorMessage="Invalid email format"
-                                         value="#{orderRegistrationAction.email}">
+                                         value="#{taskRegistrationAction.email}">
     
                                 <f:validateRegex
                                     pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
@@ -160,7 +160,7 @@
     
                             <h:inputSecret id="password"  
                                            required="true" 
-                                           value="#{orderRegistrationAction.password}" 
+                                           value="#{taskRegistrationAction.password}" 
                                            requiredMessage="Please enter password">
                             </h:inputSecret>
     
@@ -174,7 +174,7 @@
     
                             <h:inputSecret id="passwordConfirm"  
                                            required="true" 
-                                           value="#{orderRegistrationAction.matchingPassword}" 
+                                           value="#{taskRegistrationAction.matchingPassword}" 
                                            requiredMessage="Please repeat password">
                             </h:inputSecret>
     
@@ -188,13 +188,13 @@
                     <div id="registerBtnPanelId">
                         <p:commandButton id="btnRegisterId" 
                                          value="Login" 
-                                         action="#{orderRegistrationAction.register}" 
+                                         action="#{taskRegistrationAction.register}" 
                                          styleClass="registerPanelBtn">
                         </p:commandButton>
     
                         <p:commandButton id="btnCancelId" 
                                          value="Cancel" 
-                                         action="#{orderRegistrationAction.cancel}" 
+                                         action="#{taskRegistrationAction.cancel}" 
                                          styleClass="loginPanelBtn" 
                                          immediate="true" 
                                          update="regFreelancerFormmId">

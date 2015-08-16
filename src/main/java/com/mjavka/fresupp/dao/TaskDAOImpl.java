@@ -7,22 +7,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.mjavka.fresupp.model.Order;
+import com.mjavka.fresupp.model.Task;
 import java.util.Date;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Repository
-public class OrderDAOImpl implements OrderDAO
+public class TaskDAOImpl implements TaskDAO
 {
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderDAOImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(TaskDAOImpl.class);
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void addOrder(Order p)
+    public void addTask(Task p)
     {
         Session session = this.sessionFactory.getCurrentSession();
         
@@ -30,19 +30,19 @@ public class OrderDAOImpl implements OrderDAO
         
         session.persist(p);
         
-        logger.info("order saved successfully, Order Details=" + p);
+        logger.info("order saved successfully, Task Details=" + p);
     }
 
     @Override
-    public List<Order> listOrder()
+    public List<Task> listTask()
     {
         Session session = this.sessionFactory.getCurrentSession();
         
-        List<Order> ordersList = session.createQuery("from Order").list();
+        List<Task> ordersList = session.createQuery("from Task").list();
         
-        for (Order p : ordersList)
+        for (Task p : ordersList)
         {
-            logger.info("Order List::" + p);
+            logger.info("Task List::" + p);
         }
         
         return ordersList;

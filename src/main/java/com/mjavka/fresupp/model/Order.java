@@ -130,7 +130,7 @@ public class Order implements Serializable
         this.description = description;
     }
 
-    @Column(name = "type")
+    @Column(name = "order_type")
     public String getType()
     {
         return type;
@@ -176,19 +176,7 @@ public class Order implements Serializable
         this.status = status;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "ORDER_TASK_REF",
-            joinColumns =
-            {
-
-                @JoinColumn(name = "order_uuid", referencedColumnName = "object_uuid")
-            },
-            inverseJoinColumns =
-            {
-
-                @JoinColumn(name = "task_uuid", referencedColumnName = "object_uuid")
-            }
-    )
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
     public List<Task> getTaskList()
     {
         return taskList;

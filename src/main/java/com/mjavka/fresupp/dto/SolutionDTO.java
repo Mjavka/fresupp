@@ -1,8 +1,8 @@
 package com.mjavka.fresupp.dto;
 
+import com.mjavka.fresupp.model.Order;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import java.util.UUID;
 
@@ -12,9 +12,9 @@ import java.util.UUID;
  * @author mjavka
  *
  */
-public class TaskDTO implements Serializable
+public class SolutionDTO implements Serializable
 {
-    public TaskDTO()
+    public SolutionDTO()
     {
         
     }
@@ -33,9 +33,7 @@ public class TaskDTO implements Serializable
     
     private String type;
     
-    private UUID orderUuid;
-    
-    private List<UUID> taskUuidList;
+    private UUID taskUuid;
         
     public UUID getUuid()
     {
@@ -107,24 +105,14 @@ public class TaskDTO implements Serializable
         this.type = type;
     }
 
-    public UUID getOrderUuid()
+    public UUID getTaskUuid()
     {
-        return orderUuid;
+        return taskUuid;
     }
 
-    public void setOrderUuid(UUID orderUuid)
+    public void setTaskUuid(UUID taskUuid)
     {
-        this.orderUuid = orderUuid;
-    }
-
-    public List<UUID> getTaskUuidList()
-    {
-        return taskUuidList;
-    }
-
-    public void setTaskUuidList(List<UUID> taskUuidList)
-    {
-        this.taskUuidList = taskUuidList;
+        this.taskUuid = taskUuid;
     }
 
 
