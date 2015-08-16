@@ -37,50 +37,27 @@ public class Order implements Serializable
 
     }
 
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
-    @Column(name = "object_uuid", unique = true)
-    @Type(type = "pg-uuid")
+    
     private java.util.UUID uuid;
 
-    @Column(name = "name")
+    
     private String name;
 
-    @Column(name = "description")
     private String description;
     
-    @Column(name = "type")
+    
     private String type;
     
-    @Column(name = "creation_date")
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date creationDate;
     
-    @Column(name = "deadline_date")
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date deadlineDate;
 
-    @Column(name = "status")
+    
     private Integer status;
     
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
     private TechnicalTask tt;
 
     
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "ORDER_TASK_REF",
-            joinColumns =
-            {
-
-                @JoinColumn(name = "order_uuid", referencedColumnName = "object_uuid")
-            },
-            inverseJoinColumns =
-            {
-
-                @JoinColumn(name = "task_uuid", referencedColumnName = "object_uuid")
-            }
-    )
     private List<Task> taskList = new ArrayList<Task>(0);
 
     public void addTask(Task b)
@@ -104,50 +81,17 @@ public class Order implements Serializable
     }
     
     
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "ORDER_FREELANCER_REF",
-            joinColumns =
-            {
-
-                @JoinColumn(name = "order_uuid", referencedColumnName = "object_uuid")
-            },
-            inverseJoinColumns =
-            {
-
-                @JoinColumn(name = "freelancer_uuid", referencedColumnName = "object_uuid")
-            }
-    )
     private List<Freelancer> freelancersList = new ArrayList<Freelancer>();
     
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "ORDER_MANAGER_REF",
-            joinColumns =
-            {
-
-                @JoinColumn(name = "order_uuid", referencedColumnName = "object_uuid")
-            },
-            inverseJoinColumns =
-            {
-
-                @JoinColumn(name = "manager_uuid", referencedColumnName = "object_uuid")
-            }
-    )
     private List<Manager> managerList = new ArrayList<Manager>();
     
-    @ManyToOne(targetEntity = Customer.class, fetch = FetchType.LAZY)
-    @JoinTable(name="CUSTOMER_ORDER_REF",
-        joinColumns = {
-            
-            @JoinColumn(name="order_uuid", referencedColumnName = "object_uuid")},
-        
-        inverseJoinColumns = {
-            
-            @JoinColumn(name="customer_uuid", referencedColumnName = "object_uuid")
-        }
-    )
     private Customer customer;
     
-    
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @Column(name = "object_uuid", unique = true)
+    @Type(type = "pg-uuid")
     public java.util.UUID getUuid()
     {
         return uuid;
@@ -164,6 +108,7 @@ public class Order implements Serializable
         return "uuid=" + uuid + ", name=" + getName();
     }
 
+    @Column(name = "name")
     public String getName()
     {
         return name;
@@ -174,6 +119,7 @@ public class Order implements Serializable
         this.name = name;
     }
 
+    @Column(name = "description")
     public String getDescription()
     {
         return description;
@@ -184,6 +130,7 @@ public class Order implements Serializable
         this.description = description;
     }
 
+    @Column(name = "type")
     public String getType()
     {
         return type;
@@ -194,6 +141,8 @@ public class Order implements Serializable
         this.type = type;
     }
 
+    @Column(name = "creation_date")
+    @Temporal(javax.persistence.TemporalType.DATE)
     public Date getCreationDate()
     {
         return creationDate;
@@ -204,6 +153,8 @@ public class Order implements Serializable
         this.creationDate = creationDate;
     }
 
+    @Column(name = "deadline_date")
+    @Temporal(javax.persistence.TemporalType.DATE)
     public Date getDeadlineDate()
     {
         return deadlineDate;
@@ -214,6 +165,7 @@ public class Order implements Serializable
         this.deadlineDate = deadlineDate;
     }
 
+    @Column(name = "status")
     public Integer getStatus()
     {
         return status;
@@ -224,6 +176,19 @@ public class Order implements Serializable
         this.status = status;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "ORDER_TASK_REF",
+            joinColumns =
+            {
+
+                @JoinColumn(name = "order_uuid", referencedColumnName = "object_uuid")
+            },
+            inverseJoinColumns =
+            {
+
+                @JoinColumn(name = "task_uuid", referencedColumnName = "object_uuid")
+            }
+    )
     public List<Task> getTaskList()
     {
         return taskList;
@@ -234,6 +199,7 @@ public class Order implements Serializable
         this.taskList = taskList;
     }
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
     public TechnicalTask getTt()
     {
         return tt;
@@ -244,6 +210,19 @@ public class Order implements Serializable
         this.tt = tt;
     }
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "ORDER_FREELANCER_REF",
+            joinColumns =
+            {
+
+                @JoinColumn(name = "order_uuid", referencedColumnName = "object_uuid")
+            },
+            inverseJoinColumns =
+            {
+
+                @JoinColumn(name = "freelancer_uuid", referencedColumnName = "object_uuid")
+            }
+    )
     public List<Freelancer> getFreelancersList()
     {
         return freelancersList;
@@ -254,6 +233,19 @@ public class Order implements Serializable
         this.freelancersList = freelancersList;
     }
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "ORDER_MANAGER_REF",
+            joinColumns =
+            {
+
+                @JoinColumn(name = "order_uuid", referencedColumnName = "object_uuid")
+            },
+            inverseJoinColumns =
+            {
+
+                @JoinColumn(name = "manager_uuid", referencedColumnName = "object_uuid")
+            }
+    )
     public List<Manager> getManagerList()
     {
         return managerList;
@@ -264,6 +256,8 @@ public class Order implements Serializable
         this.managerList = managerList;
     }
 
+    @ManyToOne(targetEntity = Customer.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_ref")
     public Customer getCustomer()
     {
         return customer;

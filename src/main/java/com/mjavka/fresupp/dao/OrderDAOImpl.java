@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.mjavka.fresupp.model.Order;
+import java.util.Date;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,6 +25,8 @@ public class OrderDAOImpl implements OrderDAO
     public void addOrder(Order p)
     {
         Session session = this.sessionFactory.getCurrentSession();
+        
+        p.setCreationDate(new Date());
         
         session.persist(p);
         

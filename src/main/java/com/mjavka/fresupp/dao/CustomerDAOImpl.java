@@ -57,27 +57,7 @@ public class CustomerDAOImpl implements CustomerDAO
     @Override 
     public Customer getCustomerByUuid(UUID uuid)
     {
-        List<Customer> customers = new ArrayList<Customer>();
-
-        customers = sessionFactory.getCurrentSession()
-                .createQuery("FROM Customer WHERE object_uuid=?")
-                .setParameter(0, uuid)
-                .list();
-
-        if (customers.size() > 0)
-        {
-            return customers.get(0);
-        } else if (customers.size() > 1)
-        {
-            logger.error("found " + customers.size() + " customers with uuid = "
-                    + uuid);
-            
-            return null;
-        } else
-
-        {
-            return null;
-        }
+        return (Customer) sessionFactory.getCurrentSession().get(Customer.class, uuid);
         
     }
 
