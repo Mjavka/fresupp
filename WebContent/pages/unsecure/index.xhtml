@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+        <ui:define name="head">
+            <header class="header header-waterfall">
+                <span class="header-logo">fresupp</span>
+            </header>
+        </ui:define>
+        <ui:define name="body">
+            <div class="avoid-fout-indicator avoid-fout-indicator-fixed">
+                <div class="progress-circular progress-circular-alt progress-circular-center">
+                    <div class="progress-circular-wrapper">
+                        <div class="progress-circular-inner">
+                            <div class="progress-circular-left">
+                                <div class="progress-circular-spinner"></div>
+                            </div>
+                            <div class="progress-circular-gap"></div>
+                            <div class="progress-circular-right">
+                                <div class="progress-circular-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container" style="margin-top: 56px;padding-bottom: 69px;" >
+                 
+                <h:form  id="indexForm" prependId="false">
+                    <div class="row" >
+                        <div class="col-lg-4 col-sm-12 "  style="text-align: center; margin-bottom: 20px;">
+                            
+                            <h2>Тут сделаем текст какой хочешь :D</h2>
+                            
+                        </div>
+                        <div class="card-wrap">
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="card">
+                                        <a class="card-side pull-left waves-attach" href="javascript:void(0)"><span class="card-heading">Тыкать <br/> тут</span></a>
+                                        <div class="card-main">
+                                            <div class="card-inner">
+                                                <p class="card-heading">Левая! </p>
+                                                <p class="margin-bottom-lg">
+                                                    Lorem ipsum dolor sit amet.<br/>
+                                                    Consectetur adipiscing elit.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="card">
+                                        <a class="card-side pull-right waves-attach" href="javascript:void(0)"><span class="card-heading">Тыкать <br/> тут</span></a>
+                                        <div class="card-main">
+                                            <div class="card-inner" style="text-align: right">
+                                                <p class="card-heading">Правая!</p>
+                                                <p class="margin-bottom-lg">
+                                                    Lorem ipsum dolor sit amet.<br/>
+                                                    Consectetur adipiscing elit.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </h:form>
+                      
+            </div>
+
+
+
+
+            <div>
+                <h:messages></h:messages>
+            </div>
+        </ui:define>
+
+    </ui:composition>
+</html>
